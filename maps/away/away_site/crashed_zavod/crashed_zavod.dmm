@@ -468,6 +468,10 @@
 /obj/effect/decal/cleanable/floor_damage/random_tiled_broken,
 /turf/simulated/floor/airless,
 /area/space)
+"ju" = (
+/obj/structure/table/reinforced/steel,
+/turf/simulated/floor/tiled,
+/area/space)
 "jA" = (
 /obj/machinery/door/blast/shutters{
 	name = "Storage Shutter";
@@ -604,6 +608,13 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/plating,
 /area/space)
+"lT" = (
+/obj/structure/railing/mapped{
+	dir = 1
+	},
+/obj/structure/anomaly_container,
+/turf/simulated/floor/tiled,
+/area/space)
 "mb" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
@@ -651,6 +662,12 @@
 /area/space)
 "mE" = (
 /obj/effect/decal/cleanable/blood/oil,
+/turf/simulated/floor/tiled,
+/area/space)
+"mF" = (
+/obj/structure/shipping_container{
+	icon_state = "grey2"
+	},
 /turf/simulated/floor/tiled,
 /area/space)
 "mK" = (
@@ -838,9 +855,19 @@
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/dark/airless,
 /area/space)
+"pk" = (
+/obj/structure/shipping_container{
+	icon_state = "blue2"
+	},
+/turf/simulated/floor/tiled,
+/area/space)
 "pp" = (
 /obj/machinery/door/airlock/external,
 /turf/simulated/floor/plating,
+/area/space)
+"ps" = (
+/obj/structure/filingcabinet/chestdrawer,
+/turf/simulated/floor/tiled,
 /area/space)
 "px" = (
 /obj/structure/table/wood,
@@ -918,6 +945,12 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/airless,
+/area/space)
+"rj" = (
+/obj/structure/shipping_container{
+	icon_state = "green2"
+	},
+/turf/simulated/floor/tiled,
 /area/space)
 "rD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1097,6 +1130,12 @@
 	},
 /turf/simulated/floor/airless,
 /area/space)
+"um" = (
+/obj/structure/shipping_container{
+	icon_state = "green3"
+	},
+/turf/simulated/floor/tiled,
+/area/space)
 "ut" = (
 /turf/simulated/floor/tiled,
 /area/space)
@@ -1185,6 +1224,10 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/airless,
 /area/space)
+"wh" = (
+/obj/structure/shipping_container,
+/turf/simulated/floor/tiled,
+/area/space)
 "wp" = (
 /obj/item/clothing/shoes/workboots,
 /obj/effect/decal/cleanable/dirt,
@@ -1239,6 +1282,12 @@
 /obj/effect/decal/cleanable/floor_damage/random_tiled_broken,
 /turf/simulated/floor/airless,
 /area/space)
+"xH" = (
+/obj/structure/shipping_container{
+	icon_state = "red3"
+	},
+/turf/simulated/floor/tiled,
+/area/space)
 "xT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 8
@@ -1265,6 +1314,12 @@
 	dir = 4
 	},
 /turf/simulated/floor/airless,
+/area/space)
+"yf" = (
+/obj/structure/shipping_container{
+	icon_state = "blue3"
+	},
+/turf/simulated/floor/tiled,
 /area/space)
 "yo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1332,6 +1387,12 @@
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/simulated/floor/airless,
+/area/space)
+"zH" = (
+/obj/structure/shipping_container{
+	icon_state = "red1"
+	},
+/turf/simulated/floor/tiled,
 /area/space)
 "zN" = (
 /obj/structure/cable{
@@ -1485,6 +1546,12 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/exoplanet/wood,
+/area/space)
+"BV" = (
+/obj/structure/shipping_container{
+	icon_state = "grey3"
+	},
+/turf/simulated/floor/tiled,
 /area/space)
 "BX" = (
 /obj/item/hullbeacon/red,
@@ -1847,6 +1914,12 @@
 /obj/effect/decal/cleanable/vomit,
 /turf/simulated/floor/plating,
 /area/space)
+"HY" = (
+/obj/structure/shipping_container{
+	icon_state = "green1"
+	},
+/turf/simulated/floor/tiled,
+/area/space)
 "Ii" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
@@ -1984,6 +2057,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/airless,
 /area/space)
+"Lb" = (
+/obj/structure/reagent_dispensers/fueltank,
+/turf/simulated/floor/tiled,
+/area/space)
 "Lo" = (
 /obj/machinery/door/airlock/external{
 	dir = 4
@@ -2011,6 +2088,10 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/turf/simulated/floor/tiled,
+/area/space)
+"LO" = (
+/obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/tiled,
 /area/space)
 "LQ" = (
@@ -2073,6 +2154,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/space)
+"NH" = (
+/obj/machinery/ship_weapon/francisca/compact,
+/turf/simulated/wall/shuttle/space_ship/mercenary,
+/area/space)
 "NI" = (
 /obj/effect/decal/cleanable/floor_damage/rust,
 /obj/effect/spider/stickyweb,
@@ -2107,6 +2192,12 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/airless,
+/area/space)
+"On" = (
+/obj/structure/shipping_container{
+	icon_state = "grey1"
+	},
+/turf/simulated/floor/tiled,
 /area/space)
 "Oo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -2170,6 +2261,13 @@
 "Pi" = (
 /obj/structure/inflatable/wall,
 /turf/simulated/floor/airless,
+/area/space)
+"Pj" = (
+/obj/structure/table/reinforced/steel,
+/obj/item/ship_ammunition/francisca,
+/obj/item/ship_ammunition/francisca,
+/obj/item/ship_ammunition/francisca,
+/turf/simulated/floor/tiled,
 /area/space)
 "Ps" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2800,6 +2898,12 @@
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled,
+/area/space)
+"ZR" = (
+/obj/structure/shipping_container{
+	icon_state = "red2"
 	},
 /turf/simulated/floor/tiled,
 /area/space)
@@ -27087,7 +27191,7 @@ Mp
 Mp
 Mp
 Mp
-Mp
+NH
 Mp
 Mp
 Cj
@@ -27340,11 +27444,11 @@ ut
 ut
 ut
 ut
-ut
-ut
-ut
-ut
-ut
+ju
+ju
+ju
+ju
+ju
 ut
 RR
 ut
@@ -27597,11 +27701,11 @@ ut
 ut
 ut
 ut
-ut
-ut
-ut
-ut
-ut
+Pj
+ju
+ju
+ju
+ju
 ut
 RR
 ut
@@ -27876,7 +27980,7 @@ ut
 ut
 ut
 ut
-ut
+On
 ut
 ut
 jA
@@ -28111,7 +28215,7 @@ ut
 ut
 ut
 ut
-ut
+On
 ut
 ut
 ut
@@ -28133,7 +28237,7 @@ ut
 ut
 ut
 ut
-ut
+mF
 ut
 ut
 jA
@@ -28368,7 +28472,7 @@ ut
 ut
 ut
 ut
-ut
+mF
 ut
 ut
 ut
@@ -28390,7 +28494,7 @@ ut
 ut
 ut
 ut
-ut
+mF
 ut
 ut
 jA
@@ -28620,12 +28724,12 @@ ut
 ut
 ut
 ut
+wh
 ut
 ut
 ut
 ut
-ut
-ut
+mF
 ut
 ut
 ut
@@ -28647,7 +28751,7 @@ ut
 ut
 ut
 ut
-ut
+BV
 ut
 ut
 jA
@@ -28877,12 +28981,12 @@ ut
 ut
 ut
 ut
+pk
 ut
 ut
 ut
 ut
-ut
-ut
+BV
 ut
 ut
 ut
@@ -28892,12 +28996,12 @@ RR
 ut
 xT
 Ft
+LO
 ut
 ut
 ut
 ut
-ut
-ut
+zH
 ut
 ut
 ut
@@ -29134,7 +29238,7 @@ ut
 ut
 ut
 ut
-ut
+pk
 ut
 ut
 ut
@@ -29154,7 +29258,7 @@ ut
 ut
 ut
 ut
-ut
+ZR
 ut
 ut
 ut
@@ -29391,7 +29495,7 @@ ut
 ut
 ut
 ut
-ut
+yf
 ut
 ut
 ut
@@ -29411,7 +29515,7 @@ ut
 ut
 ut
 ut
-ut
+ZR
 ut
 ut
 ut
@@ -29668,7 +29772,7 @@ ut
 ut
 ut
 ut
-ut
+xH
 ut
 ut
 ut
@@ -30700,7 +30804,7 @@ ut
 ut
 ut
 ut
-ut
+HY
 ut
 ut
 ut
@@ -30943,7 +31047,7 @@ ut
 ut
 ut
 ut
-ut
+HY
 RR
 ut
 xT
@@ -30957,7 +31061,7 @@ ut
 ut
 ut
 ut
-ut
+rj
 ut
 ut
 ut
@@ -31200,7 +31304,7 @@ ut
 ut
 ut
 ut
-ut
+rj
 RR
 ut
 xT
@@ -31214,7 +31318,7 @@ ut
 ut
 ut
 ut
-ut
+rj
 ut
 ut
 ut
@@ -31457,7 +31561,7 @@ ut
 ut
 ut
 ut
-ut
+rj
 RR
 ut
 xT
@@ -31471,7 +31575,7 @@ ut
 ut
 ut
 ut
-ut
+rj
 ut
 ut
 ut
@@ -31700,6 +31804,8 @@ Vc
 Vc
 Vc
 Mp
+Lb
+Lb
 ut
 ut
 ut
@@ -31712,9 +31818,7 @@ ut
 ut
 ut
 ut
-ut
-ut
-ut
+um
 RR
 ut
 xT
@@ -31728,7 +31832,7 @@ ut
 ut
 ut
 ut
-ut
+um
 ut
 ut
 ut
@@ -31957,8 +32061,8 @@ Vc
 Vc
 Vc
 Mp
-ut
-ut
+Lb
+Lb
 ut
 ut
 ut
@@ -32478,7 +32582,7 @@ ut
 ut
 ut
 ut
-ut
+zH
 ut
 ut
 ut
@@ -32493,8 +32597,8 @@ Ft
 ut
 ut
 ut
-ut
-ut
+wh
+ps
 ut
 ut
 ut
@@ -32735,7 +32839,7 @@ ut
 ut
 ut
 ut
-ut
+ZR
 ut
 ut
 ut
@@ -32750,8 +32854,8 @@ Ft
 ut
 ut
 ut
-ut
-ut
+pk
+ps
 ut
 ut
 ut
@@ -32992,7 +33096,7 @@ ut
 ut
 ut
 ut
-ut
+ZR
 ut
 ut
 ut
@@ -33007,7 +33111,7 @@ Ft
 ut
 ut
 ut
-ut
+pk
 ut
 ut
 ut
@@ -33249,7 +33353,7 @@ ut
 ut
 ut
 ut
-ut
+ZR
 ut
 ut
 ut
@@ -33264,7 +33368,7 @@ Ft
 ut
 ut
 ut
-ut
+yf
 ut
 ut
 ut
@@ -33506,7 +33610,7 @@ ut
 ut
 ut
 ut
-ut
+xH
 ut
 ut
 ut
@@ -33517,7 +33621,7 @@ ut
 RR
 ut
 xT
-Ft
+lT
 kt
 py
 ut
