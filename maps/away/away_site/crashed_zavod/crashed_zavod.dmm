@@ -96,6 +96,11 @@
 /obj/effect/decal/cleanable/floor_damage/rust,
 /turf/simulated/floor/plating,
 /area/space)
+"bK" = (
+/obj/structure/table/wood,
+/obj/item/gun/projectile/pistol,
+/turf/simulated/floor/tiled,
+/area/space)
 "bR" = (
 /obj/machinery/door/blast/shutters{
 	name = "Hangar Bay Shutters";
@@ -178,6 +183,11 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/turf/simulated/floor/tiled,
+/area/space)
+"di" = (
+/obj/structure/closet/cabinet,
+/obj/item/storage/backpack/messenger/zavod,
 /turf/simulated/floor/tiled,
 /area/space)
 "dn" = (
@@ -283,6 +293,11 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
+/turf/simulated/floor/tiled,
+/area/space)
+"fl" = (
+/obj/machinery/mech_recharger,
+/mob/living/heavy_vehicle/premade/random/boring,
 /turf/simulated/floor/tiled,
 /area/space)
 "fz" = (
@@ -575,6 +590,11 @@
 /obj/effect/floor_decal/industrial/outline/red,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/airless,
+/area/space)
+"lk" = (
+/obj/structure/table/standard,
+/obj/item/clothing/head/sidecap/zavod,
+/turf/simulated/floor/tiled,
 /area/space)
 "ln" = (
 /obj/structure/table/wood,
@@ -1526,6 +1546,11 @@
 	},
 /turf/simulated/floor/airless,
 /area/space)
+"BE" = (
+/obj/machinery/mech_recharger,
+/mob/living/heavy_vehicle/premade/ripley/loader,
+/turf/simulated/floor/tiled,
+/area/space)
 "BF" = (
 /obj/machinery/door/airlock/external,
 /obj/machinery/door/blast/regular/open{
@@ -1705,6 +1730,12 @@
 	},
 /turf/simulated/floor/airless,
 /area/space)
+"Er" = (
+/obj/structure/closet/cabinet,
+/obj/item/clothing/suit/storage/hooded/wintercoat/zavod/alt,
+/obj/item/clothing/under/rank/medical/surgeon/zavod,
+/turf/simulated/floor/tiled,
+/area/space)
 "Ex" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -1771,6 +1802,7 @@
 /obj/item/ammo_magazine/assault_shotgun,
 /obj/item/ammo_magazine/assault_shotgun,
 /obj/effect/floor_decal/spline/fancy/wood,
+/obj/item/clothing/mask/gas/tactical,
 /turf/simulated/floor/exoplanet/wood,
 /area/space)
 "FZ" = (
@@ -1962,6 +1994,11 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
+/area/space)
+"IL" = (
+/obj/structure/closet/cabinet,
+/obj/item/clothing/under/rank/security/zavod/zavodsec,
+/turf/simulated/floor/tiled,
 /area/space)
 "IQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -33606,8 +33643,8 @@ Mp
 ut
 ut
 ut
-ut
-ut
+BE
+fl
 ut
 ut
 xH
@@ -34631,7 +34668,7 @@ Vc
 Vc
 Vc
 Mp
-ms
+IL
 Kb
 Kb
 Mp
@@ -35659,7 +35696,7 @@ Vc
 Vc
 Vc
 Mp
-ms
+Er
 Kb
 Kb
 Mp
@@ -36708,7 +36745,7 @@ xT
 ut
 ut
 Mp
-kG
+lk
 ut
 Fs
 zO
@@ -37715,9 +37752,9 @@ Vc
 Vc
 Vc
 Mp
-ms
+di
 Kb
-Kb
+bK
 Mp
 ut
 ut
@@ -40030,10 +40067,10 @@ Vc
 Vc
 Mp
 Mp
-ut
-ut
-ut
-ut
+Qc
+Qc
+Qc
+Qc
 nm
 Jc
 AI
@@ -40544,10 +40581,10 @@ Vc
 Vc
 Mp
 Mp
-ut
-ut
-ut
-ut
+Qc
+Qc
+Qc
+Qc
 WR
 tY
 Mp
@@ -41058,10 +41095,10 @@ Vc
 Vc
 Mp
 Mp
-ut
-ut
-ut
-ut
+Qc
+Qc
+Qc
+Qc
 WR
 ut
 Mp
