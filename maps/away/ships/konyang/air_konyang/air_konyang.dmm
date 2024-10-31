@@ -429,7 +429,6 @@
 "mc" = (
 /obj/machinery/atmospherics/binary/pump/high_power{
 	dir = 4;
-	layer = 2.8;
 	name = "CO2 to Thrusters"
 	},
 /obj/effect/floor_decal/industrial/warning/full,
@@ -1080,6 +1079,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/air_konyang/crew)
+"Ax" = (
+/obj/item/blueprints/shuttle,
+/obj/structure/table/steel,
+/obj/item/pen/drafting/blue{
+	pixel_y = 5
+	},
+/turf/simulated/floor/plating,
+/area/shuttle/air_konyang/engineering)
 "AC" = (
 /obj/machinery/computer/general_air_control/large_tank_control{
 	frequency = 0663;
@@ -1652,8 +1659,7 @@
 /area/shuttle/air_konyang/atmos)
 "Qa" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/air_konyang/rear_hall)
@@ -15166,7 +15172,7 @@ wU
 Ei
 qs
 JP
-JP
+Ax
 wy
 cD
 aL

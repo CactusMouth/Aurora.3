@@ -1,5 +1,5 @@
 // Alien larva are quite simple.
-/mob/living/carbon/alien/Life()
+/mob/living/carbon/alien/Life(seconds_per_tick, times_fired)
 	if (transforming)	return
 	if(!loc)			return
 
@@ -126,11 +126,11 @@
 
 	if(stat != DEAD)
 		if(blinded)
-			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
+			overlay_fullscreen("blind", /atom/movable/screen/fullscreen/blind)
 		else
 			clear_fullscreen("blind")
-			set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
-			set_fullscreen(eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
+			set_fullscreen(disabilities & NEARSIGHTED, "impaired", /atom/movable/screen/fullscreen/impaired, 1)
+			set_fullscreen(eye_blurry, "blurry", /atom/movable/screen/fullscreen/blurry)
 		if(machine)
 			if (machine.check_eye(src) < 0)
 				reset_view(null)
@@ -150,7 +150,7 @@
 		adjustFireLoss((environment.temperature - (T0C+66))/5) // Might be too high, check in testing.
 		if (fire) fire.icon_state = "fire2"
 		if(prob(20))
-			to_chat(src, "<span class='danger'>You feel a searing heat!</span>")
+			to_chat(src, SPAN_DANGER("You feel a searing heat!"))
 	else
 		if (fire) fire.icon_state = "fire0"
 

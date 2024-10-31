@@ -46,7 +46,7 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 /// List of all implants. Used for teleportation/tracking implants.
 GLOBAL_LIST_EMPTY(implants)
 
-/// Turf is added to this list if isStationLevel() passes when it's initialized.
+/// Turf is added to this list if is_station_level() passes when it's initialized.
 GLOBAL_LIST_EMPTY(station_turfs)
 /// List of all instanced areas by type.
 GLOBAL_LIST_EMPTY(areas_by_type)
@@ -111,7 +111,7 @@ GLOBAL_LIST_INIT(exclude_jobs, list(/datum/job/ai, /datum/job/cyborg, /datum/job
 GLOBAL_LIST_INIT(pdalist, list("Nothing", "Standard PDA", "Classic PDA", "Rugged PDA", "Slate PDA", "Smart PDA", "Tablet", "Wristbound"))
 
 /// Headset loadout choices.
-GLOBAL_LIST_INIT(headsetlist, list("Nothing", "Headset", "Bowman Headset", "Double Headset", "Wristbound Radio", "Sleek Wristbound Radio"))
+GLOBAL_LIST_INIT(headsetlist, list("Nothing", "Headset", "Bowman Headset", "Double Headset", "Wristbound Radio", "Sleek Wristbound Radio", "Clip-on Radio"))
 
 /// Primary Radio Slot loadout choices.
 GLOBAL_LIST_INIT(primary_radio_slot_choice, list("Left Ear", "Right Ear", "Wrist"))

@@ -27,6 +27,7 @@
 	buckle_dir = SOUTH
 	buckle_lying = 1
 	build_amt = 2
+	pass_flags_self = PASSTABLE
 	var/material/padding_material
 
 	var/base_icon = "bed"
@@ -126,12 +127,6 @@
 	if(buckled)
 		buckled.forceMove(dest)
 
-/obj/structure/bed/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(istype(mover) && mover.checkpass(PASSTABLE))
-		return 1
-	else
-		return ..()
-
 /obj/structure/bed/ex_act(severity)
 	switch(severity)
 		if(1.0)
@@ -202,7 +197,7 @@
 	else if(istype(attacking_item, /obj/item/grab))
 		var/obj/item/grab/G = attacking_item
 		var/mob/living/affecting = G.affecting
-		user.visible_message("<span class='notice'>[user] attempts to buckle [affecting] into \the [src]!</span>")
+		user.visible_message(SPAN_NOTICE("[user] attempts to buckle [affecting] into \the [src]!"))
 		if(do_after(user, 2 SECONDS, affecting, DO_UNIQUE))
 			affecting.forceMove(loc)
 			spawn(0)
@@ -577,7 +572,7 @@
 	pickup_sound = 'sound/items/pickup/axe.ogg'
 	center_of_mass = list("x" = 17,"y" = 7)
 	var/origin_type = /obj/structure/bed/roller
-	w_class = ITEMSIZE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/roller/hover
 	name = "medical hoverbed"
@@ -680,7 +675,7 @@
 		beds++
 		AddOverlays(I)
 
-/obj/structure/roller_rack/examine(mob/user)
+/obj/structure/roller_rack/examine(mob/user, distance, is_adjacent, infix, suffix, show_extended)
 	desc = "[initial(desc)] \nIt is holding [LAZYLEN(held)] beds."
 	. = ..()
 

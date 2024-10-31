@@ -91,7 +91,7 @@ Alpha adjustment
 
 /datum/gear_tweak/alpha/get_metadata(var/user, var/metadata, var/title = "Character Preference")
 	var/selected_alpha = tgui_input_number(user, "Choose a color.", title, 255)
-	selected_alpha = Clamp(selected_alpha, 0, 255)
+	selected_alpha = clamp(selected_alpha, 0, 255)
 	return selected_alpha
 
 /datum/gear_tweak/alpha/tweak_item(var/obj/item/item, var/metadata, var/mob/living/carbon/human/H)
@@ -308,7 +308,7 @@ var/datum/gear_tweak/custom_desc/gear_tweak_free_desc = new()
 	if(valid_custom_desc)
 		input_description = tgui_input_list(user, "Choose an item description.", "Character Preference", valid_custom_desc, metadata)
 	else
-		input_description = strip_html(tgui_input_text(user, "Choose an item description.", "Character Preference", metadata))
+		input_description = html_encode(STRIP_HTML_FULL(tgui_input_text(user, "Choose an item description.", "Character Preference", metadata, encode = FALSE, multiline = TRUE), MAX_MESSAGE_LEN))
 
 	return input_description
 

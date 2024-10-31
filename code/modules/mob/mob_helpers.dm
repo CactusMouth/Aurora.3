@@ -106,6 +106,10 @@
 				if(isbreeder)
 					return FALSE
 				return TRUE
+			if(SPECIES_VAURCA_ATTENDANT)
+				if(isbreeder)
+					return FALSE
+				return TRUE
 			if(SPECIES_VAURCA_BREEDER)
 				return TRUE
 			if(SPECIES_VAURCA_BULWARK)
@@ -276,6 +280,14 @@ var/list/global/organ_rel_size = list(
 	BP_R_FOOT = 10
 )
 
+///Find the mob at the bottom of a buckle chain
+/mob/proc/lowest_buckled_mob()
+	. = src
+	//buckled -> buckled_to from TG
+	if(buckled_to && ismob(buckled_to))
+		var/mob/Buckled = buckled_to
+		. = Buckled.lowest_buckled_mob()
+
 /proc/check_zone(zone)
 	if(!zone)
 		return BP_CHEST
@@ -286,36 +298,24 @@ var/list/global/organ_rel_size = list(
 			zone = BP_HEAD
 	return zone
 
-// Returns zone with a certain probability. If the probability fails, or no zone is specified, then a random body part is chosen.
-// Do not use this if someone is intentionally trying to hit a specific body part.
-// Use get_zone_with_miss_chance() for that.
-/proc/ran_zone(zone, probability)
-	if (zone)
+/**
+ * Return the zone or randomly, another valid zone
+ *
+ * _Do not use this if someone is intentionally trying to hit a specific body part - use get_zone_with_miss_chance() for that_
+ *
+ * probability controls the chance it chooses the passed in zone, or another random zone
+ * defaults to 80
+ */
+/proc/ran_zone(zone, probability = 80, list/weighted_list)
+	if(prob(probability))
 		zone = check_zone(zone)
-		if (prob(probability))
-			return zone
+	else
+		zone = pick_weight(weighted_list ? weighted_list : organ_rel_size) //Slightly different from TG, we have a list with organ sizes
+	return zone
 
-	var/ran_zone = zone
-	while (ran_zone == zone)
-		ran_zone = pick (
-			organ_rel_size[BP_HEAD]; BP_HEAD,
-			organ_rel_size[BP_CHEST]; BP_CHEST,
-			organ_rel_size[BP_GROIN]; BP_GROIN,
-			organ_rel_size[BP_L_ARM]; BP_L_ARM,
-			organ_rel_size[BP_R_ARM]; BP_R_ARM,
-			organ_rel_size[BP_L_LEG]; BP_L_LEG,
-			organ_rel_size[BP_R_LEG]; BP_R_LEG,
-			organ_rel_size[BP_L_HAND]; BP_L_HAND,
-			organ_rel_size[BP_R_HAND]; BP_R_HAND,
-			organ_rel_size[BP_L_FOOT]; BP_L_FOOT,
-			organ_rel_size[BP_R_FOOT]; BP_R_FOOT
-		)
-
-	return ran_zone
-
-// Emulates targetting a specific body part, and miss chances
-// May return null if missed
-// miss_chance_mod may be negative.
+/// Emulates targetting a specific body part, and miss chances
+/// May return null if missed
+/// miss_chance_mod may be negative.
 /proc/get_zone_with_miss_chance(zone, var/mob/target, var/miss_chance_mod = 0, var/ranged_attack=0, var/point_blank = FALSE)
 	zone = check_zone(zone)
 
@@ -442,12 +442,12 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 			n_letter = copytext(te, p, p+n_mod)
 		if (prob(50))
 			if (prob(30))
-				n_letter = text("[n_letter]-[n_letter]-[n_letter]")
+				n_letter = "[n_letter]-[n_letter]-[n_letter]"
 			else
-				n_letter = text("[n_letter]-[n_letter]")
+				n_letter = "[n_letter]-[n_letter]"
 		else
-			n_letter = text("[n_letter]")
-		t = text("[t][n_letter]")
+			n_letter = "[n_letter]"
+		t = "[t][n_letter]"
 		p=p+n_mod
 	return sanitize(t)
 
@@ -472,7 +472,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 /proc/findname(msg)
 	for(var/mob/M in GLOB.mob_list)
-		if (M.real_name == text("[msg]"))
+		if (M.real_name == "[msg]")
 			return 1
 	return 0
 
@@ -748,9 +748,9 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 
 	if(!lastpuke)
 		lastpuke = 1
-		to_chat(src, "<span class='warning'>You feel nauseous...</span>")
+		to_chat(src, SPAN_WARNING("You feel nauseous..."))
 		spawn(150)	//15 seconds until second warning
-			to_chat(src, "<span class='warning'>You feel like you are about to throw up!</span>")
+			to_chat(src, SPAN_WARNING("You feel like you are about to throw up!"))
 			spawn(100)	//and you have 10 more for mad dash to the bucket
 				if(!QDELETED(src))
 					empty_stomach()
@@ -1207,11 +1207,11 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		var/datum/accent/a = SSrecords.accents[used_accent]
 		if(istype(a))
 			if(hearer && hearer.client && hearer.client.prefs?.toggles_secondary & ACCENT_TAG_TEXT)
-				return {"<a href='byond://?src=\ref[src];accent_tag=[url_encode(a)]'>([a.text_tag])</a>"}
+				return {"<a href='byond://?src=[REF(src)];accent_tag=[url_encode(a)]'>([a.text_tag])</a>"}
 			else
 				var/datum/asset/spritesheet/S = get_asset_datum(/datum/asset/spritesheet/chat)
 				var/final_icon = "accent-[a.tag_icon]"
-				return {"<span onclick="window.location.href='byond://?src=\ref[src];accent_tag=[url_encode(a)]'">[S.icon_tag(final_icon)]</span>"}
+				return {"<span onclick="window.location.href='byond://?src=[REF(src)];accent_tag=[url_encode(a)]'">[S.icon_tag(final_icon)]</span>"}
 
 /mob/assign_player(var/mob/user)
 	ckey = user.ckey
@@ -1310,3 +1310,25 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 ///Can the mob hear
 /mob/proc/can_hear()
 	return !isdeaf(src)
+
+
+/// Sends a message to the mob if the current world time is less than the previous' message next_message_time, additionally sends a floating message if show_floating_message is set to true. key is an optional replacement that'll go in the assoc list, used for stuff like picklists
+/mob/proc/notify_message(var/message, var/next_message_time = 1 SECOND, var/show_floating_message = FALSE, var/key)
+	// initializes the message_notifications list so we can use standard list handling from here on out
+	// it's only lazy to save memory
+	LAZYINITLIST(message_notifications)
+
+	// if we have a key, use that, otherwise check the message
+	var/key_check = key || message
+	if((key_check in message_notifications) && world.time < message_notifications[key_check])
+		return
+
+	to_chat(src, message)
+	if(show_floating_message)
+		balloon_alert(src, strip_html_full(message))
+
+	// we only keep 10 entries in the assoc list, this is an arbitrary number meant to keep it from ballooning in size and taking up memory
+	if(length(message_notifications) >= 10)
+		message_notifications.Cut(1, 2)
+
+	message_notifications[key_check] = world.time + next_message_time

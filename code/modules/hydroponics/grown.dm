@@ -28,7 +28,7 @@
 		return
 
 	if(!SSplants)
-		to_world("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
+		to_world(SPAN_DANGER("Plant controller does not exist and [src] requires it. Aborting."))
 		qdel(src)
 		return
 
@@ -61,12 +61,18 @@
 	if(reagents.total_volume > 0)
 		bitesize = 1+round(reagents.total_volume / 2, 1)
 
+	var/static/list/loc_connections = list(
+		COMSIG_ATOM_ENTERED = PROC_REF(on_entered),
+	)
+
+	AddElement(/datum/element/connect_loc, loc_connections)
+
 /obj/item/reagent_containers/food/snacks/grown/proc/update_desc()
 
 	if(!seed)
 		return
 	if(!SSplants)
-		to_world("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
+		to_world(SPAN_DANGER("Plant controller does not exist and [src] requires it. Aborting."))
 		qdel(src)
 		return
 
@@ -146,9 +152,12 @@
 		SSplants.plant_icon_cache[icon_key] = plant_icon
 	AddOverlays(plant_icon)
 
-/obj/item/reagent_containers/food/snacks/grown/Crossed(var/mob/living/M)
+/obj/item/reagent_containers/food/snacks/grown/proc/on_entered(datum/source, atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	SIGNAL_HANDLER
+
 	if(seed && seed.get_trait(TRAIT_JUICY) == 2)
-		if(istype(M))
+		if(isliving(arrived))
+			var/mob/living/M = arrived
 
 			if(M.buckled_to)
 				return
@@ -159,12 +168,11 @@
 					return
 
 			M.stop_pulling()
-			to_chat(M, "<span class='notice'>You slipped on the [name]!</span>")
+			to_chat(M, SPAN_NOTICE("You slipped on the [name]!"))
 			playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
 			M.Stun(8)
 			M.Weaken(5)
 			seed.thrown_at(src,M)
-			sleep(-1)
 			if(src) qdel(src)
 			return
 
@@ -195,7 +203,7 @@
 			var/obj/item/stack/cable_coil/C = attacking_item
 			if(C.use(5))
 				//TODO: generalize this.
-				to_chat(user, "<span class='notice'>You add some cable to the [src.name] and slide it inside the battery casing.</span>")
+				to_chat(user, SPAN_NOTICE("You add some cable to the [src.name] and slide it inside the battery casing."))
 				var/obj/item/cell/potato/pocell = new /obj/item/cell/potato(get_turf(user))
 				if(src.loc == user && !(user.l_hand && user.r_hand) && istype(user,/mob/living/carbon/human))
 					user.put_in_hands(pocell)
@@ -205,13 +213,13 @@
 				return
 		else if(attacking_item.sharp && !attacking_item.noslice)
 			if(seed.kitchen_tag == "pumpkin") // Ugggh these checks are awful.
-				user.show_message("<span class='notice'>You carve a face into [src]!</span>", 1)
+				user.show_message(SPAN_NOTICE("You carve a face into [src]!"), 1)
 				user.put_in_hands(new /obj/item/clothing/head/pumpkin)
 				qdel(src)
 				return
 			else if(seed.chems)
 				if(istype(attacking_item,/obj/item/material/hatchet) && !isnull(seed.chems[/singleton/reagent/woodpulp]))
-					user.show_message("<span class='notice'>You make planks out of \the [src]!</span>", 1)
+					user.show_message(SPAN_NOTICE("You make planks out of \the [src]!"), 1)
 					playsound(loc, 'sound/effects/woodcutting.ogg', 50, 1)
 					var/flesh_colour = seed.get_trait(TRAIT_FLESH_COLOUR)
 					if(!flesh_colour) flesh_colour = seed.get_trait(TRAIT_PRODUCT_COLOUR)
@@ -274,7 +282,7 @@
 			return
 		if(prob(35))
 			if(user)
-				to_chat(user, "<span class='danger'>\The [src] has fallen to bits.</span>")
+				to_chat(user, SPAN_DANGER("\The [src] has fallen to bits."))
 			qdel(src)
 
 /obj/item/reagent_containers/food/snacks/grown/attack_self(mob/user as mob)
@@ -286,14 +294,14 @@
 		return
 
 	if(user.a_intent == I_HURT)
-		user.visible_message("<span class='danger'>\The [user] squashes \the [src]!</span>")
+		user.visible_message(SPAN_DANGER("\The [user] squashes \the [src]!"))
 		seed.thrown_at(src,user)
 		sleep(-1)
 		if(src) qdel(src)
 		return
 
 	if(seed.kitchen_tag == "grass")
-		user.show_message("<span class='notice'>You make a grass tile out of \the [src]!</span>", 1)
+		user.show_message(SPAN_NOTICE("You make a grass tile out of \the [src]!"), 1)
 		var/flesh_colour = seed.get_trait(TRAIT_FLESH_COLOUR)
 		if(!flesh_colour) flesh_colour = seed.get_trait(TRAIT_PRODUCT_COLOUR)
 		for(var/i=0,i<2,i++)
@@ -311,7 +319,7 @@
 		return
 
 	if(seed.get_trait(TRAIT_SPREAD) > 0)
-		to_chat(user, "<span class='notice'>You plant the [src.name].</span>")
+		to_chat(user, SPAN_NOTICE("You plant the [src.name]."))
 		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(get_turf(user),src.seed)
 		qdel(src)
 		return
@@ -322,13 +330,13 @@
 			if("shand")
 				var/obj/item/stack/medical/bruise_pack/tajaran/poultice = new /obj/item/stack/medical/bruise_pack/tajaran(user.loc)
 				poultice.heal_brute = potency
-				to_chat(user, "<span class='notice'>You mash the leaves into a poultice.</span>")
+				to_chat(user, SPAN_NOTICE("You mash the leaves into a poultice."))
 				qdel(src)
 				return
 			if("mtear")
 				var/obj/item/stack/medical/ointment/tajaran/poultice = new /obj/item/stack/medical/ointment/tajaran(user.loc)
 				poultice.heal_burn = potency
-				to_chat(user, "<span class='notice'>You mash the petals into a poultice.</span>")
+				to_chat(user, SPAN_NOTICE("You mash the petals into a poultice."))
 				qdel(src)
 				return
 	*/

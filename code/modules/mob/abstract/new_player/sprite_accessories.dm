@@ -404,6 +404,12 @@ Follow by example and make good judgement based on length which list to include 
 	species_allowed = list(/datum/species/human,/datum/species/human/offworlder,/datum/species/machine/shell,/datum/species/machine/shell/rogue,/datum/species/zombie)
 	chatname = "unbuzzed hair"
 
+/datum/sprite_accessory/hair/bobcut_overeye
+	name = "Bobcut, overeye"
+	icon_state = "hair_bobcut_overeye"
+	length = 2
+	chatname = "bobcut"
+
 /datum/sprite_accessory/hair/chop
 	name = "Chop"
 	icon_state = "hair_chop"
@@ -478,6 +484,18 @@ Follow by example and make good judgement based on length which list to include 
 	icon_state = "hair_drills_drillruru_long"
 	length = 3
 	chatname = "hair drills"
+
+/datum/sprite_accessory/hair/diagonal_bangs
+	name = "Diagonal Bangs"
+	icon_state = "hair_diagonal_bangs"
+	length = 2
+	chatname = "bangs"
+
+/datum/sprite_accessory/hair/eagle
+	name = "Eagle"
+	icon_state = "hair_eagle"
+	length = 1
+	chatname = "short hair"
 
 /datum/sprite_accessory/hair/emo
 	name = "Emo"
@@ -564,6 +582,12 @@ Follow by example and make good judgement based on length which list to include 
 	name = "Fade, None"
 	icon_state = "hair_fade_none"
 	chatname = "short hair"
+
+/datum/sprite_accessory/hair/falcon
+	name = "Falcon"
+	icon_state = "hair_falcon"
+	length = 3
+	chatname = "very long hair"
 
 /datum/sprite_accessory/hair/father
 	name = "Father"
@@ -702,6 +726,12 @@ Follow by example and make good judgement based on length which list to include 
 	icon_state = "hair_hitop"
 	chatname = "hitop"
 
+/datum/sprite_accessory/hair/hummingbird
+	name = "Hummingbird"
+	icon_state = "hair_hummingbird"
+	length = 2
+	chatname = "long hair"
+
 /datum/sprite_accessory/hair/jade
 	name = "Jade"
 	icon_state = "hair_jade"
@@ -758,6 +788,28 @@ Follow by example and make good judgement based on length which list to include 
 	icon_state = "hair_long_verylong"
 	length = 4
 	chatname = "very long hair"
+
+/datum/sprite_accessory/hair/macaw
+	name = "Macaw"
+	icon_state = "hair_macaw"
+	length = 2
+	chatname = "long hair"
+
+/datum/sprite_accessory/hair/magpie
+	name = "Magpie, 1"
+	icon_state = "hair_magpie"
+
+/datum/sprite_accessory/hair/magpie/two
+	name = "Magpie, 2"
+	icon_state = "hair_magpie2"
+
+/datum/sprite_accessory/hair/magpie/three
+	name = "Magpie, 3"
+	icon_state = "hair_magpie3"
+
+/datum/sprite_accessory/hair/magpie/four
+	name = "Magpie, 4"
+	icon_state = "hair_magpie4"
 
 /datum/sprite_accessory/hair/marysue
 	name = "Mary Sue"
@@ -1479,7 +1531,6 @@ Follow by example and make good judgement based on length which list to include 
 	chatname = "unshaved hair"
 	name = "Undercut 3"
 	icon_state = "hair_undercut3"
-	chatname = "unshaved hair"
 
 /datum/sprite_accessory/hair/undercut4
 	name = "Undercut 4"
@@ -1489,6 +1540,11 @@ Follow by example and make good judgement based on length which list to include 
 /datum/sprite_accessory/hair/undercut5
 	name = "Undercut 5"
 	icon_state = "hair_undercut5"
+	chatname = "unshaved hair"
+
+/datum/sprite_accessory/hair/curtain
+	name = "Short Curtain"
+	icon_state = "hair_curtain"
 	chatname = "unshaved hair"
 
 /datum/sprite_accessory/hair/unkept
@@ -1525,98 +1581,10 @@ Follow by example and make good judgement based on length which list to include 
 	icon_state = "hair_fingercurl"
 	chatname = "fluffy hair"
 
-/datum/sprite_accessory/hair/bug_eyes
-	icon = 'icons/mob/human_face/dionae_hair.dmi'
-	name = "Bug Eyes"
-	icon_state = "bugeyes"
-	species_allowed = list(/datum/species/diona, /datum/species/diona/coeu)
-	gender = NEUTER
-	do_colouration = FALSE
-
-/datum/sprite_accessory/hair/bug_eyes/human_eyes
-	name = "Human Eyes"
-	icon_state = "humaneyes"
-
-/datum/sprite_accessory/hair/bug_eyes/skrell_eyes
-	name = "Skrell Eyes"
-	icon_state = "skrelleyes"
-
-/datum/sprite_accessory/hair/bug_eyes/skrell_eyes_2
-	name = "Skrell Eyes 2"
-	icon_state = "skrelleyes2"
-
-/datum/sprite_accessory/hair/bug_eyes/small_horns
-	name = "Small Horns"
-	icon_state = "smallhorns"
-
-/datum/sprite_accessory/hair/bug_eyes/horny
-	name = "Horny"
-	icon_state = "horny"
-
-/datum/sprite_accessory/hair/bug_eyes/headtails
-	name = "Head tails"
-	icon_state = "headtails"
-
-/datum/sprite_accessory/hair/bug_eyes/headtails_2
-	name = "Head tails 2"
-	icon_state = "headtails2"
-
-/datum/sprite_accessory/hair/bug_eyes/tiny_eye
-	name = "Tiny Eye"
-	icon_state = "tinyeye"
-
-/datum/sprite_accessory/hair/bug_eyes/eyebrow
-	name = "Eyebrow"
-	icon_state = "eyebrow"
-
-/datum/sprite_accessory/hair/bug_eyes/bullhorn
-	name = "Bullhorn"
-	icon_state = "bullhorn"
-
-/datum/sprite_accessory/hair/bug_eyes/blinkinghelmethead
-	name = "Blinking Helmethead"
-	icon_state = "blinkinghelmethead"
-
-/datum/sprite_accessory/hair/bug_eyes/periscope
-	name = "Periscope"
-	icon_state = "periscope"
-
-/datum/sprite_accessory/hair/bug_eyes/glorp
-	name = "Glorp"
-	icon_state = "glorp"
-
-/datum/sprite_accessory/hair/bug_eyes/mellow_cap
-	name = "Mellow Cap"
-	icon_state = "mellowcap"
-
-/datum/sprite_accessory/hair/bug_eyes/red_cap
-	name = "Red Cap"
-	icon_state = "redcap"
-
-/datum/sprite_accessory/hair/bug_eyes/fun_guy
-	name = "Fun Guy"
-	icon_state = "funguy"
-
-/datum/sprite_accessory/hair/bug_eyes/spanish_moss
-	name = "Spanish Moss"
-	icon_state = "spanishmoss"
-
-/datum/sprite_accessory/hair/bug_eyes/shelflife
-	name = "Shelflife"
-	icon_state = "shelflife"
-	do_colouration = TRUE
-
-/datum/sprite_accessory/hair/bug_eyes/oak
-	name = "Oak"
-	icon_state = "oak"
-
-/datum/sprite_accessory/hair/bug_eyes/thorns
-	name = "Thorns"
-	icon_state = "thorns"
-
-/datum/sprite_accessory/hair/bug_eyes/stump
-	name = "Stump"
-	icon_state = "stump"
+/datum/sprite_accessory/hair/mullet
+	name = "Mullet"
+	icon_state = "hair_mullet"
+	chatname = "mullet"
 
 // TG-format hair - uses ICON_MULTIPLY instead of ICON_ADD
 /datum/sprite_accessory/hair/balding
@@ -2051,6 +2019,30 @@ Follow by example and make good judgement based on length which list to include 
 /datum/sprite_accessory/facial_hair/sevenOclockstache
 	name = "7 O'clock Shadow and Moustache"
 	icon_state = "facial_7oclockmoustache"
+
+/datum/sprite_accessory/facial_hair/threeOclockstubble
+	name = "3 O'clock Stubble"
+	icon_state = "facial_3oclock_stubble"
+
+/datum/sprite_accessory/facial_hair/threeOclockstachestubble
+	name = "3 O'clock Stubble and Moustache"
+	icon_state = "facial_3oclockmoustache_stubble"
+
+/datum/sprite_accessory/facial_hair/fiveOclockstubble
+	name = "5 O'clock Stubble"
+	icon_state = "facial_5oclock_stubble"
+
+/datum/sprite_accessory/facial_hair/fiveOclockstachestubble
+	name = "5 O'clock Stubble and Moustache"
+	icon_state = "facial_5oclockmoustache_stubble"
+
+/datum/sprite_accessory/facial_hair/sevenOclockstubble
+	name = "7 O'clock Stubble"
+	icon_state = "facial_7oclock_stubble"
+
+/datum/sprite_accessory/facial_hair/sevenOclockstachestubble
+	name = "7 O'clock Stubble and Moustache"
+	icon_state = "facial_7oclockmoustache_stubble"
 
 /datum/sprite_accessory/facial_hair/abe
 	name = "Abraham Lincoln Beard"
@@ -2929,6 +2921,12 @@ Follow by example and make good judgement based on length which list to include 
 	length = 2
 	chatname = "groomed short mane"
 
+/datum/sprite_accessory/hair/taj_ears/taj_ears_bobcut_overeye
+	name = "Tajara Bobcut, overeye"
+	icon_state = "hair_bobcut_overeye"
+	length = 2
+	chatname = "bobcut"
+
 /datum/sprite_accessory/hair/taj_ears/taj_ears_braid
 	name = "Tajara Braid"
 	icon_state = "hair_braid"
@@ -3182,6 +3180,12 @@ Follow by example and make good judgement based on length which list to include 
 	length = 3
 	chatname = "styled mane"
 
+/datum/sprite_accessory/hair/taj_ears/taj_ears_diagonal_bangs
+	name = "Tajara Diagonal Bangs"
+	icon_state = "hair_diagonal_bangs"
+	length = 2
+	chatname = "bangs"
+
 //msai hair, longer ears
 /datum/sprite_accessory/hair/msai_ears
 	icon = 'icons/mob/human_face/msai_hair.dmi'
@@ -3213,6 +3217,12 @@ Follow by example and make good judgement based on length which list to include 
 	icon_state = "msai_bob"
 	length = 2
 	chatname = "groomed short mane"
+
+/datum/sprite_accessory/hair/msai_ears/msai_ears_bobcut_overeye
+	name = "M'sai Bobcut, overeye"
+	icon_state = "hair_bobcut_overeye"
+	length = 2
+	chatname = "bobcut"
 
 /datum/sprite_accessory/hair/msai_ears/msai_ears_braid
 	name = "M'sai Braid"
@@ -3466,6 +3476,12 @@ Follow by example and make good judgement based on length which list to include 
 	icon_state = "msai_longswoop_alt"
 	length = 3
 	chatname = "styled mane"
+
+/datum/sprite_accessory/hair/msai_ears/msai_ears_diagonal_bangs
+	name = "M'sai Diagonal Bangs"
+	icon_state = "hair_diagonal_bangs"
+	length = 2
+	chatname = "bangs"
 
 //tesla rejuvenation suit hair
 /datum/sprite_accessory/hair/tesla_ears
@@ -3751,7 +3767,7 @@ Follow by example and make good judgement based on length which list to include 
 	icon = 'icons/mob/human_face/vaurca_hair.dmi'
 	name = "Classic Antennae"
 	icon_state = "vaurca_classic"
-	species_allowed = list(/datum/species/bug,/datum/species/bug/type_b)
+	species_allowed = list(/datum/species/bug, /datum/species/bug/type_b, /datum/species/bug/type_b/type_bb)
 	gender = NEUTER
 	chatname = "antennae"
 
@@ -4418,74 +4434,6 @@ Follow by example and make good judgement based on length which list to include 
 	name = "golden deep IPC screen"
 	icon_state = "ipc_gd"
 
-/datum/sprite_accessory/facial_hair/diona_eye
-	icon = 'icons/mob/human_face/dionae_hair.dmi'
-	name = "Mono Eye"
-	icon_state = "monoeye"
-	species_allowed = list(/datum/species/diona, /datum/species/diona/coeu)
-	gender = NEUTER
-	do_colouration = FALSE
-
-/datum/sprite_accessory/facial_hair/diona_eye/trioptics
-	name = "Trioptics"
-	icon_state = "trioptics"
-
-/datum/sprite_accessory/facial_hair/diona_eye/lopsided
-	name = "Lopsided Eyes"
-	icon_state = "lopsided"
-
-/datum/sprite_accessory/facial_hair/diona_eye/helmethead
-	name = "Helmethead"
-	icon_state = "helmethead"
-
-/datum/sprite_accessory/facial_hair/diona_eye/eyestalk
-	name = "Eyestalk"
-	icon_state = "eyestalk"
-
-/datum/sprite_accessory/facial_hair/diona_eye/treebeard
-	name = "Treebeard"
-	icon_state = "treebeard"
-
-/datum/sprite_accessory/facial_hair/diona_eye/bug_eyes
-	name = "Bug Eyes"
-	icon_state = "bugeyes"
-
-/datum/sprite_accessory/facial_hair/diona_eye/human_eyes
-	name = "Human Eyes"
-	icon_state = "humaneyes"
-
-/datum/sprite_accessory/facial_hair/diona_eye/skrell_eyes
-	name = "Skrell Eyes"
-	icon_state = "skrelleyes"
-
-/datum/sprite_accessory/facial_hair/diona_eye/skrell_eyes_2
-	name = "Skrell Eyes 2"
-	icon_state = "skrelleyes2"
-
-/datum/sprite_accessory/facial_hair/diona_eye/tiny_eye
-	name = "Tiny Eye"
-	icon_state = "tinyeye"
-
-/datum/sprite_accessory/facial_hair/diona_eye/eyebrow
-	name = "Eyebrow"
-	icon_state = "eyebrow"
-
-/datum/sprite_accessory/facial_hair/diona_eye/blinkinghelmethead
-	name = "Blinking Helmethead"
-	icon_state = "blinkinghelmethead"
-
-/datum/sprite_accessory/facial_hair/diona_eye/periscope
-	name = "Periscope"
-	icon_state = "periscope"
-
-/datum/sprite_accessory/facial_hair/diona_eye/glorp
-	name = "Glorp"
-	icon_state = "glorp"
-
-/datum/sprite_accessory/facial_hair/diona_eye/snout
-	name = "Snout"
-	icon_state = "snout"
-
 /datum/sprite_accessory/facial_hair/tuux_whiskers
 	icon = 'icons/mob/human_face/skrell_beards.dmi'
 	name = "Tuux Tentacle Whiskers"
@@ -4967,7 +4915,7 @@ Follow by example and make good judgement based on length which list to include 
 	icon_state = "mecha_chest"
 	do_colouration = FALSE
 	body_parts = list(BP_CHEST)
-	species_allowed = list(/datum/species/bug, /datum/species/bug/type_b)
+	species_allowed = list(/datum/species/bug, /datum/species/bug/type_b, /datum/species/bug/type_b/type_bb)
 
 /datum/sprite_accessory/marking/vaurca_augs/mecha_abdomen
 	name = "Mecha Abdomen"
@@ -4991,10 +4939,22 @@ Follow by example and make good judgement based on length which list to include 
 	icon_state = "mecha_eye_r"
 	body_parts = list(BP_HEAD)
 	do_colouration = FALSE
+	species_allowed = list(/datum/species/bug, /datum/species/bug/type_b/type_bb)
+
+/datum/sprite_accessory/marking/vaurca_augs/mecha_eye/warrior
+	name = "Mecha Eye (Faceplate, Right, Warrior)"
+	icon_state = "mecha_eye_warrior_r"
+	species_allowed = list(/datum/species/bug/type_b)
 
 /datum/sprite_accessory/marking/vaurca_augs/mecha_eye/mecha_eye_l
 	name = "Mecha Eye (Faceplate, Left)"
 	icon_state = "mecha_eye_l"
+	species_allowed = list(/datum/species/bug, /datum/species/bug/type_b/type_bb)
+
+/datum/sprite_accessory/marking/vaurca_augs/mecha_eye/mecha_eye_l/warrior
+	name = "Mecha Eye (Faceplate, Left, Warrior)"
+	icon_state = "mecha_eye_warrior_l"
+	species_allowed = list(/datum/species/bug/type_b)
 
 /datum/sprite_accessory/marking/vaurca_augs/mecha_eyeoverlay
 	name = "Mecha Eye (Overlay, Right)"
@@ -5005,15 +4965,45 @@ Follow by example and make good judgement based on length which list to include 
 	name = "Mecha Eye (Overlay, Left)"
 	icon_state = "mecha_eyeoverlay_l"
 
+/datum/sprite_accessory/marking/vaurca_augs/mecha_eyeoverlay/upper
+	name = "Upper Mecha Eye (Overlay, Right)"
+	icon_state = "mecha_uppereyeoverlay_r"
+
+/datum/sprite_accessory/marking/vaurca_augs/mecha_eye/mecha_eyeoverlay_l/upper
+	name = "Upper Mecha Eye (Overlay, Left)"
+	icon_state = "mecha_uppereyeoverlay_l"
+
+/datum/sprite_accessory/marking/vaurca_augs/mecha_eyeoverlay/lower
+	name = "Lower Mecha Eye (Overlay, Right)"
+	icon_state = "mecha_lowereyeoverlay_r"
+
+/datum/sprite_accessory/marking/vaurca_augs/mecha_eye/mecha_eyeoverlay_l/lower
+	name = "Lower Mecha Eye (Overlay, Left)"
+	icon_state = "mecha_lowereyeoverlay_l"
+
 /datum/sprite_accessory/marking/vaurca_augs/mecha_eye_l
 	name = "Mecha Eye (Faceplate, Right, Large)"
 	icon_state = "mecha_eye_r_l"
 	body_parts = list(BP_HEAD)
 	do_colouration = FALSE
+	species_allowed = list(/datum/species/bug, /datum/species/bug/type_b/type_bb)
+
+/datum/sprite_accessory/marking/vaurca_augs/mecha_eye_l/warrior
+	name = "Mecha Eye (Faceplate, Right, Large, Warrior)"
+	icon_state = "mecha_eye_warrior_r_l"
+	body_parts = list(BP_HEAD)
+	do_colouration = FALSE
+	species_allowed = list(/datum/species/bug/type_b)
 
 /datum/sprite_accessory/marking/vaurca_augs/mecha_eye_l/mecha_eye_r_l
 	name = "Mecha Eye (Faceplate, Left, Large)"
 	icon_state = "mecha_eye_l_l"
+	species_allowed = list(/datum/species/bug, /datum/species/bug/type_b/type_bb)
+
+/datum/sprite_accessory/marking/vaurca_augs/mecha_eye_l/mecha_eye_r_l/warrior
+	name = "Mecha Eye (Faceplate, Left, Large, Warrior)"
+	icon_state = "mecha_eye_warrior_l_l"
+	species_allowed = list(/datum/species/bug/type_b)
 
 /datum/sprite_accessory/marking/vaurca_augs/mecha_eyeoverlay_l
 	name = "Mecha Eye (Overlay, Right, Large)"
@@ -5024,9 +5014,11 @@ Follow by example and make good judgement based on length which list to include 
 	name = "Mecha Eye (Overlay, Left, Large)"
 	icon_state = "mecha_eyeoverlay_l_l"
 
-/datum/sprite_accessory/marking/vaurca_augs/mecha_eye_b/mandible
+/datum/sprite_accessory/marking/vaurca_augs/mandible
 	name = "Mecha Mandibles"
 	icon_state = "mecha_mandibles"
+	body_parts = list(BP_HEAD)
+	do_colouration = FALSE
 
 /datum/sprite_accessory/marking/vaurca_augs/hand_panel_r
 	name = "Hand Panel (Right)"
@@ -6011,13 +6003,13 @@ Follow by example and make good judgement based on length which list to include 
 	name = "Spelunker"
 	icon_state = "spelunker"
 	body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_CHEST,BP_GROIN,BP_HEAD)
-	species_allowed = list(/datum/species/bug,/datum/species/bug/type_b)
+	species_allowed = list(/datum/species/bug,/datum/species/bug/type_b, /datum/species/bug/type_b/type_bb)
 
 /datum/sprite_accessory/marking/delver
 	name = "Delver"
 	icon_state = "delver"
 	body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_CHEST,BP_GROIN,BP_HEAD)
-	species_allowed = list(/datum/species/bug,/datum/species/bug/type_b)
+	species_allowed = list(/datum/species/bug, /datum/species/bug/type_b, /datum/species/bug/type_b/type_bb)
 
 /datum/sprite_accessory/marking/skr_tears
 	name = "Skrell Tear Stains (Xiialt)"
@@ -6209,6 +6201,10 @@ Follow by example and make good judgement based on length which list to include 
 	name = "Helmethead"
 	icon_state = "helmethead"
 
+/datum/sprite_accessory/marking/diona_leaves/bug_eyes/blinkinghelmethead
+	name = "Blinking Helmethead"
+	icon_state = "blinkinghelmethead"
+
 /datum/sprite_accessory/marking/diona_leaves/bug_eyes/eyestalk
 	name = "Eyestalk"
 	icon_state = "eyestalk"
@@ -6237,6 +6233,30 @@ Follow by example and make good judgement based on length which list to include 
 	name = "Snout"
 	icon_state = "snout"
 
+/datum/sprite_accessory/marking/diona_leaves/bug_eyes/headtails
+	name = "Head tails"
+	icon_state = "headtails"
+
+/datum/sprite_accessory/marking/diona_leaves/bug_eyes/headtails2
+	name = "Head tails 2"
+	icon_state = "headtails2"
+
+/datum/sprite_accessory/marking/diona_leaves/bug_eyes/spanish_moss
+	name = "Spanish Moss"
+	icon_state = "spanishmoss"
+
+/datum/sprite_accessory/marking/diona_leaves/bug_eyes/fun_guy
+	name = "Fun Guy"
+	icon_state = "funguy"
+
+/datum/sprite_accessory/marking/diona_leaves/bug_eyes/red_cap
+	name = "Red Cap"
+	icon_state = "redcap"
+
+/datum/sprite_accessory/marking/diona_leaves/bug_eyes/mellow_cap
+	name = "Mellow Cap"
+	icon_state = "mellowcap"
+
 /datum/sprite_accessory/marking/diona_leaves/pbody
 	name = "P-Body"
 	icon_state = "pbody"
@@ -6257,12 +6277,6 @@ Follow by example and make good judgement based on length which list to include 
 	name = "Hand Eyes"
 	icon_state = "handeye"
 	body_parts = list(BP_R_HAND, BP_L_HAND)
-	do_colouration = FALSE
-
-/datum/sprite_accessory/marking/diona_leaves/tail
-	name = "Tail"
-	icon_state = "dionatail"
-	body_parts = list(BP_GROIN)
 	do_colouration = FALSE
 
 // Baseline markings.
@@ -6336,6 +6350,41 @@ Follow by example and make good judgement based on length which list to include 
 /datum/sprite_accessory/marking/bishop_lights/bishop_mask/bishop_triangular_mask
 	name = "Bishop - Triangular Face Mask"
 	icon_state = "bishop_triangular_mask"
+
+
+/datum/sprite_accessory/marking/bishop_lights/selen
+	name = "Bishop - Selen Primary Colors"
+	icon_state = "selen_primary"
+	body_parts = list(BP_HEAD)
+	robotize_type_required = list(PROSTHETIC_SELEN)
+
+/datum/sprite_accessory/marking/bishop_lights/bishop_mask/selen/lights
+	name = "Bishop - Selen Lights"
+	icon_state = "selen_lights"
+	body_parts = list(BP_HEAD)
+
+/datum/sprite_accessory/marking/bishop_lights/bishop_mask/sienna
+	name = "Bishop - Sienna Primary Colors"
+	icon_state = "sienna_primary"
+	body_parts = list(BP_HEAD)
+	robotize_type_required = list(PROSTHETIC_SIENNA)
+
+/datum/sprite_accessory/marking/bishop_lights/sienna/lights
+	name = "Bishop - Sienna Lights"
+	icon_state = "sienna_lights"
+	body_parts = list(BP_HEAD)
+
+/datum/sprite_accessory/marking/bishop_lights/siseyo
+	name = "Bishop - Siseyo Primary Colors"
+	icon_state = "siseyo_primary"
+	body_parts = list(BP_HEAD)
+	robotize_type_required = list(PROSTHETIC_SISEYO)
+
+/datum/sprite_accessory/marking/bishop_lights/sienna/lights
+	name = "Bishop - Siseyo Lights"
+	icon_state = "siseyo_lights"
+	body_parts = list(BP_HEAD)
+
 
 /datum/sprite_accessory/marking/bishop_lights/bishop_panels
 	name = "Bishop - Full Body Panel Colors"

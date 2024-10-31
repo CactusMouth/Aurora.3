@@ -38,6 +38,7 @@
 	bowman = /obj/item/device/radio/headset/headset_service/alt
 	double_headset = /obj/item/device/radio/headset/alt/double/service
 	wrist_radio = /obj/item/device/radio/headset/wrist/service
+	clipon_radio = /obj/item/device/radio/headset/wrist/clip/service
 
 	backpack_faction = /obj/item/storage/backpack/nt
 	satchel_faction = /obj/item/storage/backpack/satchel/nt
@@ -84,6 +85,7 @@
 	bowman = /obj/item/device/radio/headset/headset_service/alt
 	double_headset = /obj/item/device/radio/headset/alt/double/service
 	wrist_radio = /obj/item/device/radio/headset/wrist/service
+	clipon_radio = /obj/item/device/radio/headset/wrist/clip/service
 
 	backpack_faction = /obj/item/storage/backpack/nt
 	satchel_faction = /obj/item/storage/backpack/satchel/nt
@@ -134,6 +136,7 @@
 	bowman = /obj/item/device/radio/headset/headset_service/alt
 	double_headset = /obj/item/device/radio/headset/alt/double/service
 	wrist_radio = /obj/item/device/radio/headset/wrist/service
+	clipon_radio = /obj/item/device/radio/headset/wrist/clip/service
 
 	backpack = /obj/item/storage/backpack/hydroponics
 	backpack_faction = /obj/item/storage/backpack/nt
@@ -164,7 +167,7 @@
 	supervisors = "the executive officer"
 	selection_color = "#90524b"
 	access = list(ACCESS_JANITOR, ACCESS_MAINT_TUNNELS, ACCESS_ENGINE, ACCESS_RESEARCH, ACCESS_SEC_DOORS, ACCESS_MEDICAL)
-	minimal_access = list(ACCESS_JANITOR, ACCESS_ENGINE, ACCESS_RESEARCH, ACCESS_SEC_DOORS, ACCESS_MEDICAL)
+	minimal_access = list(ACCESS_JANITOR, ACCESS_MAINT_TUNNELS, ACCESS_ENGINE, ACCESS_RESEARCH, ACCESS_SEC_DOORS, ACCESS_MEDICAL)
 	outfit = /obj/outfit/job/janitor
 	blacklisted_species = list(SPECIES_VAURCA_BREEDER)
 
@@ -185,6 +188,7 @@
 	bowman = /obj/item/device/radio/headset/headset_service/alt
 	double_headset = /obj/item/device/radio/headset/alt/double/service
 	wrist_radio = /obj/item/device/radio/headset/wrist/service
+	clipon_radio = /obj/item/device/radio/headset/wrist/clip/service
 
 	backpack_faction = /obj/item/storage/backpack/nt
 	satchel_faction = /obj/item/storage/backpack/satchel/nt
@@ -205,7 +209,7 @@
 	minimal_access = list(ACCESS_LIBRARY)
 	alt_titles = list("Curator", "Tech Support")
 	alt_outfits = list("Curator" = /obj/outfit/job/librarian/curator, "Tech Support" = /obj/outfit/job/librarian/tech_support)
-	title_accesses = list("Tech Support" = ACCESS_IT)
+	title_accesses = list("Tech Support" = list(ACCESS_IT, ACCESS_TECH_STORAGE))
 	outfit = /obj/outfit/job/librarian
 
 	blacklisted_species = list(SPECIES_VAURCA_BREEDER)
@@ -227,6 +231,7 @@
 	bowman = /obj/item/device/radio/headset/headset_service/alt
 	double_headset = /obj/item/device/radio/headset/alt/double/service
 	wrist_radio = /obj/item/device/radio/headset/wrist/service
+	clipon_radio = /obj/item/device/radio/headset/wrist/clip/service
 
 	backpack_faction = /obj/item/storage/backpack/nt
 	satchel_faction = /obj/item/storage/backpack/satchel/nt
@@ -271,7 +276,7 @@
 	selection_color = "#90524b"
 	access = list(ACCESS_CHAPEL_OFFICE, ACCESS_MAINT_TUNNELS)
 	minimal_access = list(ACCESS_CHAPEL_OFFICE)
-	alt_titles = list("Presbyter", "Rabbi", "Imam", "Priest", "Shaman", "Counselor", "Keeper")
+	alt_titles = list("Presbyter", "Rabbi", "Imam", "Priest", "Priestess", "Shaman", "Counselor", "Keeper", "Shaper")
 	outfit = /obj/outfit/job/chaplain
 
 	blacklisted_species = list(SPECIES_VAURCA_BREEDER)
@@ -286,6 +291,7 @@
 	bowman = /obj/item/device/radio/headset/headset_service/alt
 	double_headset = /obj/item/device/radio/headset/alt/double/service
 	wrist_radio = /obj/item/device/radio/headset/wrist/service
+	clipon_radio = /obj/item/device/radio/headset/wrist/clip/service
 
 	tab_pda = /obj/item/modular_computer/handheld/pda/civilian/chaplain
 	wristbound = /obj/item/modular_computer/handheld/wristbound/preset/pda/civilian/chaplain
@@ -354,7 +360,7 @@
 
 	outfit = /obj/outfit/job/operations_manager
 
-	blacklisted_species = list(SPECIES_TAJARA_MSAI, SPECIES_TAJARA_ZHAN, SPECIES_VAURCA_WORKER, SPECIES_VAURCA_WARRIOR, SPECIES_VAURCA_BULWARK, SPECIES_VAURCA_BREEDER)
+	blacklisted_species = list(SPECIES_TAJARA_MSAI, SPECIES_TAJARA_ZHAN, SPECIES_VAURCA_WORKER, SPECIES_VAURCA_WARRIOR, SPECIES_VAURCA_ATTENDANT, SPECIES_VAURCA_BULWARK, SPECIES_VAURCA_BREEDER)
 
 /obj/outfit/job/operations_manager
 	name = "Operations Manager"
@@ -362,7 +368,7 @@
 
 	uniform = /obj/item/clothing/under/rank/operations_manager
 	shoes = /obj/item/clothing/shoes/sneakers/brown
-	id = /obj/item/card/id/navy
+	id = /obj/item/card/id/scc/silver
 	l_hand = /obj/item/clipboard
 	glasses = /obj/item/clothing/glasses/sunglasses
 
@@ -374,6 +380,7 @@
 	bowman = /obj/item/device/radio/headset/operations_manager/alt
 	double_headset = /obj/item/device/radio/headset/alt/double/operations_manager
 	wrist_radio = /obj/item/device/radio/headset/wrist/cargo/operations_manager
+	clipon_radio = /obj/item/device/radio/headset/wrist/clip/cargo/operations_manager
 
 	backpack = /obj/item/storage/backpack/om
 	satchel = /obj/item/storage/backpack/satchel/om
@@ -420,6 +427,7 @@
 	bowman = /obj/item/device/radio/headset/headset_cargo/alt
 	double_headset = /obj/item/device/radio/headset/alt/double/cargo
 	wrist_radio = /obj/item/device/radio/headset/wrist/cargo
+	clipon_radio = /obj/item/device/radio/headset/wrist/clip/cargo
 
 /datum/job/mining
 	title = "Shaft Miner"
@@ -462,6 +470,7 @@
 	bowman = /obj/item/device/radio/headset/headset_mining/alt
 	double_headset = /obj/item/device/radio/headset/alt/double/mining
 	wrist_radio = /obj/item/device/radio/headset/wrist/cargo/mining
+	clipon_radio = /obj/item/device/radio/headset/wrist/clip/cargo/mining
 
 	backpack_contents = list(
 		/obj/item/storage/bag/ore = 1
@@ -518,6 +527,7 @@
 	bowman = /obj/item/device/radio/headset/headset_cargo/alt
 	double_headset = /obj/item/device/radio/headset/alt/double/cargo
 	wrist_radio = /obj/item/device/radio/headset/wrist/cargo
+	clipon_radio = /obj/item/device/radio/headset/wrist/clip/cargo
 
 	belt_contents = list(
 		/obj/item/screwdriver = 1,

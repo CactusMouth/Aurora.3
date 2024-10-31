@@ -113,7 +113,9 @@
 	return 0
 
 /obj/machinery/atmospherics/unary/engine/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	return 0
+	if(mover?.movement_type & PHASING)
+		return TRUE
+	return FALSE
 
 /obj/machinery/atmospherics/unary/engine/atmos_init()
 	..()
@@ -195,7 +197,7 @@
 
 /obj/machinery/atmospherics/unary/engine/proc/check_blockage()
 	blockage = FALSE
-	var/exhaust_dir = reverse_direction(dir)
+	var/exhaust_dir = REVERSE_DIR(dir)
 	var/turf/A = get_turf(src)
 	for(var/i in 1 to exhaust_offset)
 		A = get_step(A, exhaust_dir)
@@ -212,7 +214,7 @@
 	if(!is_on())
 		return 0
 	if(!check_fuel() || (0 < use_power_oneoff(charge_per_burn)) || check_blockage())
-		audible_message(src,"<span class='warning'>[src] coughs once and goes silent!</span>")
+		audible_message(src,SPAN_WARNING("[src] coughs once and goes silent!"))
 		update_use_power(POWER_USE_OFF)
 		return 0
 
@@ -220,11 +222,20 @@
 	if(!removed)
 		return 0
 	. = calculate_thrust(removed)
-	playsound(loc, 'sound/machines/thruster.ogg', 50 * thrust_limit * power_modifier, FALSE, world.view * 4, 0.1)
+
+	var/volume_adjustment = 1
+
+	var/obj/effect/overmap/visitable/ship/my_ship = GLOB.map_sectors["[z]"]
+	if(!my_ship)
+		stack_trace("No ship found for gas thruster at z-level [z].")
+	else
+		volume_adjustment = length(my_ship.engines)
+
+	playsound(loc, 'sound/machines/thruster.ogg', ((50 * thrust_limit * power_modifier) / volume_adjustment ), FALSE, world.view * 4, 0.1)
 	if(network)
 		network.update = 1
 
-	var/exhaust_dir = reverse_direction(dir)
+	var/exhaust_dir = REVERSE_DIR(dir)
 	var/turf/T = get_turf(src)
 	for(var/i in 1 to exhaust_offset)
 		T = get_step(T, exhaust_dir)

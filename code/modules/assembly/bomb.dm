@@ -3,7 +3,7 @@
 	icon = 'icons/obj/tank.dmi'
 	item_state = "assembly"
 	throwforce = 5
-	w_class = ITEMSIZE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
 	throw_speed = 2
 	throw_range = 4
 	obj_flags = OBJ_FLAG_CONDUCTABLE
@@ -12,9 +12,9 @@
 	var/obj/item/device/assembly_holder/bombassembly = null   //The first part of the bomb is an assembly holder, holding an igniter+some device
 	var/obj/item/tank/bombtank = null //the second part of the bomb is a phoron tank
 
-/obj/item/device/onetankbomb/examine(mob/user)
+/obj/item/device/onetankbomb/examine(mob/user, distance, is_adjacent, infix, suffix, show_extended)
 	. = ..()
-	examinate(user, bombtank)
+	examinate(user, bombtank, show_extended)
 
 /obj/item/device/onetankbomb/update_icon()
 	if(bombtank)
@@ -49,11 +49,11 @@
 			status = TRUE
 			GLOB.bombers += "[key_name(user)] welded a single tank bomb. Temp: [bombtank.air_contents.temperature-T0C]"
 			message_admins("[key_name_admin(user)] welded a single tank bomb. Temp: [bombtank.air_contents.temperature-T0C]")
-			to_chat(user, "<span class='notice'>A pressure hole has been bored to [bombtank] valve. \The [bombtank] can now be ignited.</span>")
+			to_chat(user, SPAN_NOTICE("A pressure hole has been bored to [bombtank] valve. \The [bombtank] can now be ignited."))
 		else
 			status = FALSE
 			GLOB.bombers += "[key_name(user)] unwelded a single tank bomb. Temp: [bombtank.air_contents.temperature-T0C]"
-			to_chat(user, "<span class='notice'>The hole has been closed.</span>")
+			to_chat(user, SPAN_NOTICE("The hole has been closed."))
 	add_fingerprint(user)
 	..()
 

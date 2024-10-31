@@ -6,7 +6,8 @@
 	item_state = ""	//no inhands
 	overlay_state = null
 	slot_flags = SLOT_TIE
-	w_class = ITEMSIZE_SMALL
+	w_class = WEIGHT_CLASS_SMALL
+
 	var/slot = ACCESSORY_SLOT_GENERIC
 	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
@@ -17,6 +18,7 @@
 	sprite_sheets = list(
 		BODYTYPE_VAURCA_BULWARK = 'icons/mob/species/bulwark/accessories.dmi'
 	)
+	var/protects_against_weather = FALSE
 
 /obj/item/clothing/accessory/Destroy()
 	on_removed()
@@ -59,24 +61,23 @@
 		accessory_mob_overlay = null // reset the overlay
 	else
 		I = INV_ACCESSORIES_DEF_ICON
-	if(!accessory_mob_overlay || force)
-		var/tmp_icon_state = "[overlay_state? "[overlay_state]" : "[icon_state]"]"
-		if(icon_override)
-			if(contained_sprite)
-				auto_adapt_species(H)
-				tmp_icon_state = "[UNDERSCORE_OR_NULL(src.icon_species_tag)][src.item_state][WORN_UNDER]"
-			else if("[tmp_icon_state]_mob" in icon_states(I))
-				tmp_icon_state = "[tmp_icon_state]_mob"
-		else if(contained_sprite)
+	var/tmp_icon_state = "[overlay_state? "[overlay_state]" : "[icon_state]"]"
+	if(icon_override)
+		if(contained_sprite)
 			auto_adapt_species(H)
 			tmp_icon_state = "[UNDERSCORE_OR_NULL(src.icon_species_tag)][src.item_state][WORN_UNDER]"
-		accessory_mob_overlay = image("icon" = I, "icon_state" = "[tmp_icon_state]")
-		if(build_from_parts || has_accents)
-			accessory_mob_overlay.ClearOverlays()
-		if(build_from_parts)
-			accessory_mob_overlay.AddOverlays(overlay_image(I, "[tmp_icon_state]_[worn_overlay]", flags=RESET_COLOR)) //add the overlay w/o coloration of the original sprite
-		if(has_accents)
-			accessory_mob_overlay.AddOverlays(overlay_image(I, "[tmp_icon_state]_acc", accent_color, flags=accent_flags))
+		else if("[tmp_icon_state]_mob" in icon_states(I))
+			tmp_icon_state = "[tmp_icon_state]_mob"
+	else if(contained_sprite)
+		auto_adapt_species(H)
+		tmp_icon_state = "[UNDERSCORE_OR_NULL(src.icon_species_tag)][src.item_state][WORN_UNDER]"
+	accessory_mob_overlay = image("icon" = I, "icon_state" = "[tmp_icon_state]")
+	if(build_from_parts || has_accents)
+		accessory_mob_overlay.ClearOverlays()
+	if(build_from_parts)
+		accessory_mob_overlay.AddOverlays(overlay_image(I, "[tmp_icon_state]_[worn_overlay]", flags=RESET_COLOR)) //add the overlay w/o coloration of the original sprite
+	if(has_accents)
+		accessory_mob_overlay.AddOverlays(overlay_image(I, "[tmp_icon_state]_acc", accent_color, flags=accent_flags))
 	if(color)
 		accessory_mob_overlay.color = color
 	accessory_mob_overlay.appearance_flags = RESET_ALPHA|RESET_COLOR
@@ -90,7 +91,7 @@
 	loc = has_suit
 	has_suit.AddOverlays(get_inv_overlay())
 	if(user)
-		to_chat(user, "<span class='notice'>You attach \the [src] to \the [has_suit].</span>")
+		to_chat(user, SPAN_NOTICE("You attach \the [src] to \the [has_suit]."))
 		src.add_fingerprint(user)
 	update_light()
 
@@ -154,6 +155,11 @@
 
 /obj/item/clothing/accessory/proc/flip_message(mob/user)
 	to_chat(user, "You change \the [src] to be on your [src.flipped ? "right" : "left"] side.")
+
+/obj/item/clothing/accessory/update_clothing_icon()
+	if (ismob(loc))
+		var/mob/mob = src.loc
+		mob.update_inv_wear_suit()
 
 /obj/item/clothing/accessory/red
 	name = "red tie"
@@ -265,7 +271,9 @@
 	flippable = 1
 	var/auto_examine = FALSE
 
-/obj/item/clothing/accessory/stethoscope/attack(mob/living/carbon/human/M, mob/user)
+/obj/item/clothing/accessory/stethoscope/attack(mob/living/target_mob, mob/living/user, target_zone)
+	var/mob/living/carbon/human/M = target_mob
+
 	if(ishuman(M) && isliving(user))
 		if(user.a_intent == I_HELP)
 			var/obj/item/organ/organ = M.get_organ(user.zone_sel.selecting)
@@ -357,6 +365,14 @@
 	build_from_parts = TRUE
 	worn_overlay = "stripes"
 
+/obj/item/clothing/accessory/shawl
+	name = "cozy shawl"
+	desc = "A favored accessory amongst grandmothers and cottagecore enthusiasts."
+	icon = 'icons/obj/clothing/shawl.dmi'
+	icon_state = "shawl"
+	item_state = "shawl"
+	contained_sprite = TRUE
+
 /obj/item/clothing/accessory/chaps
 	name = "brown chaps"
 	desc = "A pair of loose, brown leather chaps."
@@ -384,10 +400,11 @@
 	slot_flags = SLOT_OCLOTHING | SLOT_TIE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 	siemens_coefficient = 0.9
-	w_class = ITEMSIZE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
 	slot = ACCESSORY_SLOT_CAPE
 	contained_sprite = TRUE
 	var/allow_tail_hiding = TRUE //in case if you want to allow someone to switch the HIDETAIL var or not
+	protects_against_weather = TRUE
 
 /obj/item/clothing/accessory/poncho/verb/toggle_hide_tail()
 	set name = "Toggle Tail Coverage"
@@ -396,7 +413,7 @@
 
 	if(allow_tail_hiding)
 		flags_inv ^= HIDETAIL
-		to_chat(usr, "<span class='notice'>[src] will now [flags_inv & HIDETAIL ? "hide" : "show"] your tail.</span>")
+		to_chat(usr, SPAN_NOTICE("[src] will now [flags_inv & HIDETAIL ? "hide" : "show"] your tail."))
 
 /obj/item/clothing/accessory/poncho/big
 	name = "large poncho"
@@ -654,6 +671,7 @@
 	item_state = "starcape"
 	flippable = TRUE
 	contained_sprite = FALSE
+	protects_against_weather = FALSE
 
 /obj/item/clothing/accessory/poncho/shouldercape/star
 	name = "star cape"
@@ -692,7 +710,7 @@
 
 /obj/item/clothing/accessory/poncho/shouldercape/qeblak
 	name = "qeblak mantle"
-	desc = "A mantle denoting the wearer as a member fo the Qeblak faith."
+	desc = "A mantle denoting the wearer as a member of the Qeblak faith."
 	desc_extended = "This mantle denotes the wearer as a member of the Qeblak faith. \
 	It is given to followers after they have completed their coming of age ceremony. \
 	The symbol on the back is of a protostar as it transitions into a main sequence star, \
@@ -703,7 +721,7 @@
 
 /obj/item/clothing/accessory/poncho/shouldercape/weishiirobe
 	name = "weishii robe"
-	desc = "A robe denoting the wearer as a member fo the Weishii faith."
+	desc = "A robe denoting the wearer as a member of the Weishii faith."
 	desc_extended = "This mantle denotes the wearer as a member of the Weishii faith. \
 	It is given to followers after they have spent time on a Weishiin Sanctuary."
 	icon_state = "weishii_robe"
@@ -732,6 +750,7 @@
 	item_state = "trinary_cape"
 	overlay_state = "trinary_cape"
 	contained_sprite = FALSE
+	protects_against_weather = FALSE
 
 /obj/item/clothing/accessory/poncho/trinary/pellegrina
 	name = "trinary perfection pellegrina"
@@ -769,23 +788,6 @@
 	var/image/robe_backing = image(icon, null, "robe_backing", H ? H.layer - 0.01 : MOB_LAYER - 0.01)
 	base.AddOverlays(robe_backing)
 	return base
-
-//tau ceti legion ribbons
-/obj/item/clothing/accessory/legion
-	name = "seniority ribbons"
-	desc = "A ribbon meant to attach to the chest and sling around the shoulder accompanied by two medallions, marking seniority in the Tau Ceti Armed Forces."
-	icon_state = "senior_ribbon"
-	item_state = "senior_ribbon"
-	overlay_state = "senior_ribbon"
-	slot = ACCESSORY_SLOT_CAPE
-	flippable = TRUE
-
-/obj/item/clothing/accessory/legion/specialist
-	name = "specialist medallion"
-	desc = "Two small medallions, one worn on the shoulder and the other worn on the chest. Meant to display the rank of specialist troops in the Tau Ceti Armed Forces."
-	icon_state = "specialist_medallion"
-	item_state = "specialist_medallion"
-	overlay_state = "specialist_medallion"
 
 /obj/item/clothing/accessory/offworlder
 	name = "venter assembly"
@@ -873,7 +875,7 @@
 	overlay_state = null
 	badge_string = null
 	slot_flags = SLOT_TIE
-	w_class = ITEMSIZE_TINY
+	w_class = WEIGHT_CLASS_TINY
 
 /obj/item/clothing/accessory/ribbon
 	name = "ribbon"
@@ -881,7 +883,7 @@
 	icon_state = "ribbon"
 	item_state = "ribbon"
 	slot_flags = SLOT_TIE
-	w_class = ITEMSIZE_TINY
+	w_class = WEIGHT_CLASS_TINY
 
 /obj/item/clothing/accessory/sleevepatch
 	name = "sleeve patch"
@@ -973,6 +975,11 @@
 	name = "AB- blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as AB NEGATIVE."
 	icon_state = "abnegtag"
+
+/obj/item/clothing/accessory/blood_patch/sbs
+	name = "SBS blood patch"
+	desc = "An embroidered patch indicating the wearer's blood type as SYNTHETIC BLOOD SUBSTITUTE."
+	icon_state = "sbstag"
 
 
 // Corporate Liaison stuff.

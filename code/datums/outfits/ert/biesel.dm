@@ -6,7 +6,7 @@
 	gloves = /obj/item/clothing/gloves/tcaf
 	glasses = /obj/item/clothing/glasses/safety/goggles/tactical/generic
 	shoes = /obj/item/clothing/shoes/jackboots
-	id = /obj/item/card/id
+	id = /obj/item/card/id/distress/legion/tcaf
 	accessory = /obj/item/clothing/accessory/holster/hip
 	l_ear = /obj/item/device/radio/headset/legion
 	r_pocket = /obj/item/crowbar/red
@@ -15,7 +15,6 @@
 	mask = /obj/item/clothing/mask/gas
 	suit_store = /obj/item/gun/energy/blaster/tcaf
 	accessory_contents = list(/obj/item/gun/energy/blaster/revolver = 1)
-	id = /obj/item/card/id/distress/legion/tcaf
 	belt = /obj/item/storage/belt/military
 	belt_contents = list(
 		/obj/item/melee/energy/sword/knife = 1,
@@ -29,7 +28,8 @@
 		SPECIES_TAJARA_MSAI = /obj/item/clothing/shoes/jackboots/toeless,
 		SPECIES_TAJARA_ZHAN = /obj/item/clothing/shoes/jackboots/toeless,
 		SPECIES_VAURCA_WORKER = /obj/item/clothing/shoes/vaurca,
-		SPECIES_VAURCA_WARRIOR =/obj/item/clothing/shoes/vaurca
+		SPECIES_VAURCA_WARRIOR =/obj/item/clothing/shoes/vaurca,
+		SPECIES_VAURCA_ATTENDANT =/obj/item/clothing/shoes/vaurca
 	)
 	id_iff = IFF_TCFL
 
@@ -56,7 +56,7 @@
 
 /obj/outfit/admin/ert/tcaf/medic
 	name = "Republican Fleet Medic"
-	belt = /obj/item/storage/belt/medical/first_responder/combat
+	belt = /obj/item/storage/belt/medical/paramedic/combat
 	glasses = /obj/item/clothing/glasses/hud/health
 	gloves = /obj/item/clothing/gloves/latex/nitrile
 	species_gloves = list(
@@ -65,6 +65,7 @@
 		SPECIES_TAJARA_MSAI = /obj/item/clothing/gloves/latex/nitrile/tajara,
 		SPECIES_TAJARA_ZHAN = /obj/item/clothing/gloves/latex/nitrile/tajara,
 		SPECIES_VAURCA_WARRIOR = /obj/item/clothing/gloves/latex/nitrile/vaurca,
+		SPECIES_VAURCA_ATTENDANT = /obj/item/clothing/gloves/latex/nitrile/vaurca,
 		SPECIES_VAURCA_WORKER = /obj/item/clothing/gloves/latex/nitrile/vaurca,
 	)
 
@@ -101,6 +102,7 @@
 		SPECIES_TAJARA_MSAI = /obj/item/clothing/gloves/yellow/specialt,
 		SPECIES_TAJARA_ZHAN = /obj/item/clothing/gloves/yellow/specialt,
 		SPECIES_VAURCA_WARRIOR = null,
+		SPECIES_VAURCA_ATTENDANT = null,
 		SPECIES_VAURCA_WORKER = null
 	)
 	accessory = /obj/item/clothing/accessory/storage/brown_vest

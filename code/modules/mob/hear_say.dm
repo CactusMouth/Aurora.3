@@ -57,7 +57,7 @@
 	if(isdeaf(src))
 		if(!language || !(language.flags & INNATE)) // INNATE is the flag for audible-emote-language, so we don't want to show an "x talks but you cannot hear them" message if it's set
 			if(speaker == src)
-				to_chat(src, "<span class='warning'>You cannot hear yourself speak!</span>")
+				to_chat(src, SPAN_WARNING("You cannot hear yourself speak!"))
 			else
 				to_chat(src, "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear them.")
 	else
@@ -208,11 +208,11 @@
 
 		if(changed_voice)
 			if(impersonating)
-				track = "<a class='ai_tracking' href='byond://?src=\ref[src];trackname=[html_encode(speaker_name)];track=\ref[impersonating]'>[speaker_name] ([jobname])</a>"
+				track = "<a class='ai_tracking' href='byond://?src=[REF(src)];trackname=[html_encode(speaker_name)];track=[REF(impersonating)]'>[speaker_name] ([jobname])</a>"
 			else
 				track = "[speaker_name] ([jobname])"
 		else
-			track = "<a class='ai_tracking' href='byond://?src=\ref[src];trackname=[html_encode(speaker_name)];track=\ref[speaker]'>[speaker_name] ([jobname])</a>"
+			track = "<a class='ai_tracking' href='byond://?src=[REF(src)];trackname=[html_encode(speaker_name)];track=[REF(speaker)]'>[speaker_name] ([jobname])</a>"
 
 	if(istype(src, /mob/abstract/observer))
 		if(speaker != null)
@@ -228,7 +228,7 @@
 	formatted += part_c
 	if(isdeaf(src))
 		if(prob(20))
-			to_chat(src, "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>")
+			to_chat(src, SPAN_WARNING("You feel your headset vibrate but can hear nothing from it!"))
 	else
 		on_hear_radio(part_a, speaker_name, track, part_b, formatted, accent_icon)
 

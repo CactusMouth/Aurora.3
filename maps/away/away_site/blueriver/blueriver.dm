@@ -5,10 +5,16 @@
 	spawn_weight = 1
 	description = "An arctic planet and an alien underground surface."
 
-	prefix = "away_site/blueriver/"
-	suffixes = list("blueriver-1.dmm","blueriver-2.dmm")
+	traits = list(
+		//Z1
+		list(ZTRAIT_AWAY = TRUE, ZTRAIT_UP = TRUE, ZTRAIT_DOWN = FALSE),
+		//Z2
+		list(ZTRAIT_AWAY = TRUE, ZTRAIT_UP = FALSE, ZTRAIT_DOWN = TRUE),
+	)
 
-	generate_mining_by_z = 2
+	prefix = "away_site/blueriver/"
+	suffix = "blueriver.dmm"
+
 	sectors = list(SECTOR_ROMANOVICH, SECTOR_CORP_ZONE, SECTOR_VALLEY_HALE, SECTOR_BADLANDS, ALL_COALITION_SECTORS)
 	sectors_blacklist = list(ALL_SPECIFIC_SECTORS) //it's a whole ass planet, shouldn't have it in predefined sectors
 
@@ -105,9 +111,9 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 	user.visible_message(
-		"<span class='danger'>[user] hits \the [src] with \the [attacking_item]!</span>",
-		"<span class='danger'>You hit \the [src] with \the [attacking_item]!</span>",
-		"<span class='danger'>You hear something breaking!</span>"
+		SPAN_DANGER("[user] hits \the [src] with \the [attacking_item]!"),
+		SPAN_DANGER("You hit \the [src] with \the [attacking_item]!"),
+		SPAN_DANGER("You hear something breaking!")
 		)
 
 /obj/item/paper/blueriver/expedition_log_1

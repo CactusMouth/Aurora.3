@@ -4,7 +4,7 @@
 	description = "Ship with lizard knights."
 
 	prefix = "ships/kataphracts/"
-	suffixes = list("kataphract_ship.dmm")
+	suffix = "kataphract_ship.dmm"
 
 	ship_cost = 1
 	spawn_weight = 1
@@ -17,7 +17,7 @@
 	name = "kataphract chapter ship"
 	desc = "A large corvette manufactured by a Hephaestus sponsored Hegemonic Guild. This is a heavily armoured Kataphract Chapter ship of the venerable 'Voidbreaker' class, a relative of the more common 'Foundation' \
 	class used by their counterparts in the Hegemony Navy. These vessels are rarely seen together and strive for maximum self-suffiency as they are the homes and primary means of transportation \
-	for questing Kataphracts and their followers. They usually carry enough firepower to deter the common pirate as well as a set of boarding pods for offensive actions. This ship however has no weapon hardpoints detected. It remains capable due to its sturdy design."
+	for questing Kataphracts and their followers. They usually carry enough firepower to deter the common pirate as well as a set of boarding pods for offensive actions. It remains capable due to its sturdy design."
 	class = "IHKV" //Izweski Hegemony Kataphract Vessel
 	icon_state = "voidbreaker"
 	moving_state = "voidbreaker_moving"
@@ -31,7 +31,7 @@
 	shiptype = "Specialist long-distance extended-duration combat utility"
 	vessel_mass = 10000
 	max_speed = 1/(2 SECONDS)
-	fore_dir = NORTH
+	fore_dir = SOUTH
 	vessel_size = SHIP_SIZE_SMALL
 	initial_generic_waypoints = list(
 		"nav_kataphract_ship_1",
@@ -110,7 +110,7 @@
 	max_speed = 1/(3 SECONDS)
 	burn_delay = 2 SECONDS
 	vessel_mass = 6000 //Ship has a lot of thrusters, so if its too low the shuttle goes too fast. Also, imagine a hard egg flying towards you.
-	fore_dir = WEST
+	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_TINY
 
 /obj/machinery/computer/shuttle_control/explore/terminal/kataphract_transport
@@ -123,7 +123,7 @@
 	move_time = 20
 	shuttle_area = list(/area/shuttle/kataphract_shuttle/main_compartment, /area/shuttle/kataphract_shuttle/engine_compartment)
 	current_location = "nav_hangar_kataphract_shuttle"
-	dock_target = "kataphract_transport"
+	dock_target = "airlock_kataphract_transport"
 	landmark_transition = "nav_kataphract_transport_transit"
 	range = 2 // It's a big boy
 	fuel_consumption = 4
@@ -134,6 +134,7 @@
 	name = "Kataphract Transport"
 	shuttle_tag = "Kataphract Transport"
 	master_tag = "airlock_kataphract_transport"
+	cycle_to_external_air = TRUE
 
 /obj/effect/shuttle_landmark/kataphract_transport/hangar
 	name = "Kataphract Transport Shuttle Hangar"
@@ -146,7 +147,7 @@
 /obj/effect/map_effect/marker/airlock/docking/kataphract_shuttle/hangar
 	name = "Shuttle Dock"
 	landmark_tag = "nav_hangar_kataphract_shuttle"
-	master_tag = "airlock_kataphract_ship_shuttle_dock"
+	master_tag = "nav_hangar_kataphract_shuttle"
 
 /obj/effect/shuttle_landmark/kataphract_transport/transit
 	name = "In transit"

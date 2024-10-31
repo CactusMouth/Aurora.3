@@ -67,8 +67,7 @@
 	name = "[street_name]"
 	desc = "This sign indicates this crossing street is called [street_name]."
 
-/obj/structure/stairs/urban
-	abstract_type = /obj/structure/stairs/urban
+ABSTRACT_TYPE(/obj/structure/stairs/urban)
 	icon = 'icons/obj/structure/urban/ledges.dmi'
 	icon_state = "stairs-single"
 	layer = 2.01
@@ -92,12 +91,11 @@
 	dir = SOUTH
 	bound_height = 64
 
-/obj/structure/stairs/urban/road_ramp
+ABSTRACT_TYPE(/obj/structure/stairs/urban/road_ramp)
 	name = "inclined asphalt ramp"
 	desc = "A solid asphalt ramp to allow your vehicle to traverse inclines with ease."
 	icon_state = "road-ramp-center"
 	layer = 2.02
-	abstract_type = /obj/structure/stairs/urban/road_ramp
 
 /obj/structure/stairs/urban/road_ramp/right
 	dir = EAST
@@ -168,7 +166,7 @@
 		playsound(src.loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
 		to_chat(user, "You forcibly relocate the manhole, hopefully in the right way.")
 	if(!open)
-		visible_message("<span class='warning'>A horrid smell erupts from the abyss of the manhole, not one any soul should inhale. Some mistakes were made.</span>")
+		visible_message(SPAN_WARNING("A horrid smell erupts from the abyss of the manhole, not one any soul should inhale. Some mistakes were made."))
 		icon_state = "manhole_open"
 		desc = "This looks pretty dangerous, stinks horribly, and doesn't have a ladder inside. Watch out!"
 		open = 1
@@ -176,7 +174,7 @@
 		turf.is_hole = TRUE
 		return
 	if(open)
-		visible_message("<span class='warning'>The manhole clunks and seals back into place, safely burying our problems underground for someone else later.</span>")
+		visible_message(SPAN_WARNING("The manhole clunks and seals back into place, safely burying our problems underground for someone else later."))
 		icon_state = "manhole_closed"
 		desc = "It looks recently opened and sloppily closed."
 		open = 0
@@ -263,9 +261,11 @@
 	anchored = TRUE
 
 /obj/structure/rod_railing/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(istype(mover,/obj/item/projectile))
+	if(mover?.movement_type & PHASING)
 		return TRUE
-	if(!istype(mover) || mover.checkpass(PASSRAILING))
+	if(istype(mover,/obj/projectile))
+		return TRUE
+	if(!istype(mover) || mover.pass_flags & PASSRAILING)
 		return TRUE
 	if(mover.throwing)
 		return TRUE
@@ -315,9 +315,11 @@
 	icon_state = "guard_top_end"
 
 /obj/structure/road_barrier/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(istype(mover,/obj/item/projectile))
+	if(mover?.movement_type & PHASING)
 		return TRUE
-	if(!istype(mover) || mover.checkpass(PASSRAILING))
+	if(istype(mover,/obj/projectile))
+		return TRUE
+	if(!istype(mover) || mover.pass_flags & PASSRAILING)
 		return TRUE
 	if(mover.throwing)
 		return TRUE
@@ -345,10 +347,12 @@
 	can_be_unanchored = FALSE
 
 /obj/structure/chainlink_fence/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
+	if(mover?.movement_type & PHASING)
+		return TRUE
 	if(air_group || (height==0))
 		return TRUE
-	if(istype(mover, /obj/item/projectile))
-		var/obj/item/projectile/P = mover
+	if(istype(mover, /obj/projectile))
+		var/obj/projectile/P = mover
 		if(P.original == src)
 			return FALSE
 		if(P.firer && Adjacent(P.firer))
@@ -356,7 +360,7 @@
 		return prob(35)
 	if(isliving(mover))
 		return FALSE
-	if(istype(mover) && mover.checkpass(PASSTABLE))
+	if(istype(mover) && mover.pass_flags & PASSTABLE)
 		return TRUE
 	return FALSE
 
@@ -380,9 +384,11 @@
 	can_be_unanchored = FALSE
 
 /obj/structure/rope_railing/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(istype(mover,/obj/item/projectile))
+	if(mover?.movement_type & PHASING)
 		return TRUE
-	if(!istype(mover) || mover.checkpass(PASSRAILING))
+	if(istype(mover,/obj/projectile))
+		return TRUE
+	if(!istype(mover) || mover.pass_flags & PASSRAILING)
 		return TRUE
 	if(mover.throwing)
 		return TRUE

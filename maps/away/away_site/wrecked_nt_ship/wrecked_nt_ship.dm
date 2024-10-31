@@ -3,7 +3,7 @@
 	description = "A wrecked ship once owned by NanoTrasen."
 
 	prefix = "away_site/wrecked_nt_ship/"
-	suffixes = list("wrecked_nt_ship.dmm")
+	suffix = "wrecked_nt_ship.dmm"
 
 	sectors = list(SECTOR_TAU_CETI, SECTOR_ROMANOVICH, SECTOR_CORP_ZONE, SECTOR_VALLEY_HALE, SECTOR_BADLANDS, ALL_COALITION_SECTORS, SECTOR_SRANDMARR)
 	sectors_blacklist = list(SECTOR_BURZSIA, SECTOR_HANEUNIM) //NT has pretty much no presence in either of these, why would there be a wrecked ship
@@ -19,7 +19,7 @@
 
 /obj/effect/overmap/visitable/wrecked_nt_ship
 	name = "wrecked NT ship"
-	desc = "A wrecked ship once owned by NanoTrasen."
+	desc = "A wrecked ship once owned by NanoTrasen, embedded within an asteroid. The ship is cold, with a faint possible lifesign detected within. Sensors have picked up exotic particles on site."
 
 /area/wrecked_nt_ship
 	name = "wrecked NT ship"
@@ -28,3 +28,7 @@
 	base_turf = /turf/space
 	no_light_control = TRUE
 	area_flags = AREA_FLAG_HIDE_FROM_HOLOMAP
+
+/area/wrecked_nt_ship/exterior
+	name = "wrecked NT ship exterior"
+	icon_state = "exterior"

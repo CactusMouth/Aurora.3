@@ -38,6 +38,7 @@
 	move_to_delay = 8
 
 	tameable = FALSE
+	sample_data = null
 
 /mob/living/simple_animal/hostile/mimic/FindTarget()
 	. = ..()
@@ -88,7 +89,7 @@
 	if(istype(L))
 		if(prob(15))
 			L.Weaken(2)
-			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
+			L.visible_message(SPAN_DANGER("\the [src] knocks down \the [L]!"))
 
 /mob/living/simple_animal/hostile/mimic/crate/proc/trigger()
 	if(!attempt_open)
@@ -119,7 +120,7 @@
 // Copy Mimic
 //
 
-var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/cable, /obj/structure/window, /obj/item/projectile/animate)
+var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/cable, /obj/structure/window, /obj/projectile/animate)
 
 /mob/living/simple_animal/hostile/mimic/copy
 
@@ -167,7 +168,7 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 		maxHealth = health
 		if(creator)
 			src.creator = creator
-			faction = "\ref[creator]" // very unique
+			faction = "[REF(creator)]" // very unique
 		return 1
 	return
 
@@ -182,4 +183,4 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 		if(istype(L))
 			if(prob(15))
 				L.Weaken(1)
-				L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
+				L.visible_message(SPAN_DANGER("\the [src] knocks down \the [L]!"))

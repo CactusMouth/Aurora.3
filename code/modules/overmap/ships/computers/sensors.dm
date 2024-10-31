@@ -2,6 +2,7 @@
 	name = "sensors console"
 	icon_screen = "sensors"
 	icon_keyboard = "cyan_key"
+	icon_keyboard_emis = "cyan_key_mask"
 	light_color = LIGHT_COLOR_CYAN
 	extra_view = 4
 	var/obj/machinery/iff_beacon/identification
@@ -40,6 +41,7 @@
 	icon = 'icons/obj/machinery/modular_terminal.dmi'
 	icon_screen = "teleport"
 	icon_keyboard = "teleport_key"
+	icon_keyboard_emis = "teleport_key_mask"
 	is_connected = TRUE
 	has_off_keyboards = TRUE
 	can_pass_under = FALSE
@@ -108,18 +110,22 @@
 	data["viewing"] = viewing_overmap(user)
 	data["muted"] = muted
 
-	data["grid_x"] = linked.x
-	data["grid_y"] = linked.y
-	data["direction"] = dir2angle(linked.dir)
-	var/linked_x = linked.x
-	var/linked_y = linked.y
-	var/obj/effect/overmap/visitable/ship/linked_ship = linked
-	if(istype(linked_ship))
-		linked_x += linked_ship.position[1] / 2.0
-		linked_y += linked_ship.position[2] / 2.0
-		data["is_ship"] = TRUE
-	data["x"] = linked_x
-	data["y"] = linked_y
+
+	var/linked_x
+	var/linked_y
+	if(linked)
+		data["grid_x"] = linked.x
+		data["grid_y"] = linked.y
+		data["direction"] = dir2angle(linked.dir)
+		linked_x = linked.x
+		linked_y = linked.y
+		var/obj/effect/overmap/visitable/ship/linked_ship = linked
+		if(istype(linked_ship))
+			linked_x += linked_ship.position[1] / 2.0
+			linked_y += linked_ship.position[2] / 2.0
+			data["is_ship"] = TRUE
+		data["x"] = linked_x
+		data["y"] = linked_y
 
 	if(sensors)
 		data["on"] = sensors.use_power
@@ -195,7 +201,7 @@
 
 			contacts.Add(list(list(
 				"name"=contact.name,
-				"ref"="\ref[contact]",
+				"ref"="[REF(contact)]",
 				"bearing"=bearing,
 				"can_datalink"=(!(contact in connected.datalinked)),
 				"distance"=distance,
@@ -210,13 +216,13 @@
 		if(length(connected.datalink_requests))
 			var/list/local_datalink_requests = list()
 			for(var/obj/effect/overmap/visitable/requestor in connected.datalink_requests)
-				local_datalink_requests.Add(list(list("name"=requestor.name, "ref"="\ref[requestor]")))
+				local_datalink_requests.Add(list(list("name"=requestor.name, "ref"="[REF(requestor)]")))
 			data["datalink_requests"]  = local_datalink_requests
 
 		if(length(connected.datalinked))
 			var/list/local_datalinked = list()
 			for(var/obj/effect/overmap/visitable/datalinked_ship in connected.datalinked)
-				local_datalinked.Add(list(list("name"=datalinked_ship.name, "ref"="\ref[datalinked_ship]")))
+				local_datalinked.Add(list(list("name"=datalinked_ship.name, "ref"="[REF(datalinked_ship)]")))
 			data["datalinked"]  = local_datalinked
 
 		data["last_scan"] = last_scan
@@ -266,14 +272,14 @@
 			if(!CanInteract(usr, GLOB.default_state))
 				return FALSE
 			if (nrange)
-				sensors.set_desired_range(Clamp(nrange, 1, sensors.max_range))
+				sensors.set_desired_range(clamp(nrange, 1, sensors.max_range))
 			return TRUE
 		if(action == "range_choice")
 			var/nrange = text2num(params["range_choice"])
 			if(!CanInteract(usr, GLOB.default_state))
 				return FALSE
 			if(nrange)
-				sensors.set_desired_range(Clamp(nrange, 1, sensors.max_range))
+				sensors.set_desired_range(clamp(nrange, 1, sensors.max_range))
 			return TRUE
 		if (action == "toggle")
 			sensors.toggle()
@@ -441,13 +447,13 @@
 			return
 
 		if(WT.use(0,user))
-			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
+			to_chat(user, SPAN_NOTICE("You start repairing the damage to [src]."))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(WT.use_tool(src, user, max(5, damage / 5), volume = 50) && WT && WT.isOn())
-				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
+				to_chat(user, SPAN_NOTICE("You finish repairing the damage to [src]."))
 				take_damage(-damage)
 		else
-			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+			to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
 			return
 		return
 	..()
@@ -495,15 +501,18 @@
 	if(health <= 0)
 		. += "\The [src] is wrecked."
 	else if(health < max_health * 0.25)
-		. += "<span class='danger'>\The [src] looks like it's about to break!</span>"
+		. += SPAN_DANGER("\The [src] looks like it's about to break!")
 	else if(health < max_health * 0.5)
-		. += "<span class='danger'>\The [src] looks seriously damaged!</span>"
+		. += SPAN_DANGER("\The [src] looks seriously damaged!")
 	else if(health < max_health * 0.75)
 		. += "\The [src] shows signs of damage!"
 
-/obj/machinery/shipsensors/bullet_act(var/obj/item/projectile/Proj)
-	take_damage(Proj.get_structure_damage())
-	..()
+/obj/machinery/shipsensors/bullet_act(obj/projectile/hitting_projectile, def_zone, piercing_hit)
+	. = ..()
+	if(. != BULLET_ACT_HIT)
+		return .
+
+	take_damage(hitting_projectile.get_structure_damage())
 
 /obj/machinery/shipsensors/proc/toggle()
 	if(use_power) // reset desired range when turning off
@@ -527,7 +536,7 @@
 		if(desired_range-range <= -max_range/2)
 			set_range(range-1) // if working hard, spool down faster too
 		if(heat > critical_heat)
-			src.visible_message("<span class='danger'>\The [src] violently spews out sparks!</span>")
+			src.visible_message(SPAN_DANGER("\The [src] violently spews out sparks!"))
 			spark(src, 3, GLOB.alldirs)
 			take_damage(rand(10,50))
 			toggle()
@@ -652,7 +661,7 @@
 
 /obj/machinery/shipsensors/strong/relay
 	name = "\improper S-24 Beacon sensor array"
-	desc = "A vintage sensor array found on Solarian beacon relays throughout the galaxy. While it lacks deep scanning capabilities, it does have a high heat capacity."
+	desc = "A vintage sensor array of Solarian design. While it lacks deep scanning capabilities, it does have a high heat capacity."
 	icon = 'icons/obj/machinery/sensors_relay.dmi'
 	density = 1
 	layer = ABOVE_HUMAN_LAYER
@@ -671,3 +680,9 @@
 	)
 	pixel_x = -32
 	pixel_y = -16
+
+/obj/machinery/shipsensors/strong/relay/sol
+	name = "\improper S-24M Beacon sensor array"
+	desc = "A vintage sensor array found on Solarian sensor relays throughout the galaxy. While it lacks deep scanning capabilities, it does have a high heat capacity. This one is emblazoned with the fading flag of the pre-war Solarian Alliance."
+	icon = 'icons/obj/machinery/sensors_relay_sol.dmi'
+	desc_extended = ""

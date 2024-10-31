@@ -20,11 +20,13 @@
 		/obj/item/gun/energy/plasmacutter	// does this even work?
 	))
 	if(is_type_in_typecache(attacking_item, barrel_cutting_tools) && w_class != 3)
-		to_chat(user, "<span class='notice'>You begin to [sawnoff_workmsg] of \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You begin to [sawnoff_workmsg] of \the [src]."))
 		if(loaded.len)
 			for(var/i in 1 to max_shells)
 				Fire(user, user)	//will this work? //it will. we call it twice, for twice the FUN
-			user.visible_message("<span class='danger'>\The [src] goes off!</span>", "<span class='danger'>\The [src] goes off in your face!</span>")
+			user.visible_message(SPAN_DANGER("\The [src] goes off!"),
+									SPAN_DANGER("\The [src] goes off in your face!"))
+
 			return
 
 		sawing_in_progress = TRUE
@@ -38,7 +40,7 @@
 
 // called on a SUCCESSFUL saw-off.
 /obj/item/gun/projectile/shotgun/proc/saw_off(mob/user, obj/item/tool)
-	to_chat(user, "<span class='notice'>You attempt to cut [src]'s barrel with [tool], but nothing happens.</span>")
+	to_chat(user, SPAN_NOTICE("You attempt to cut [src]'s barrel with [tool], but nothing happens."))
 	LOG_DEBUG("shotgun: attempt to saw-off shotgun with no saw-off behavior.")
 
 /obj/item/gun/projectile/shotgun/pump
@@ -51,7 +53,7 @@
 	icon_state = "shotgun"
 	item_state = "shotgun"
 	max_shells = 7 // max of 8
-	w_class = ITEMSIZE_LARGE
+	w_class = WEIGHT_CLASS_BULKY
 	force = 15
 	obj_flags = OBJ_FLAG_CONDUCTABLE
 	slot_flags = SLOT_BACK
@@ -143,7 +145,7 @@
 	load_method = SINGLE_CASING|SPEEDLOADER
 	handle_casings = CYCLE_CASINGS
 	max_shells = 2
-	w_class = ITEMSIZE_LARGE
+	w_class = WEIGHT_CLASS_BULKY
 	force = 15
 	obj_flags = OBJ_FLAG_CONDUCTABLE
 	is_wieldable = TRUE
@@ -190,13 +192,13 @@
 	item_state = "sawnshotgun"
 	accuracy = 0
 	is_wieldable = FALSE
-	w_class = ITEMSIZE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
 	force = 11
 	slot_flags &= ~SLOT_BACK	//you can't sling it on your back
 	slot_flags |= (SLOT_BELT|SLOT_HOLSTER) //but you can wear it on your belt (poorly concealed under a trenchcoat, ideally) - or in a holster, why not.
 	name = "sawn-off shotgun"
 	desc = "Omar's coming!"
-	to_chat(user, "<span class='warning'>You shorten the barrel of \the [src]!</span>")
+	to_chat(user, SPAN_WARNING("You shorten the barrel of \the [src]!"))
 
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn
 	name = "sawn-off shotgun"
@@ -208,7 +210,7 @@
 	is_wieldable = FALSE
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
-	w_class = ITEMSIZE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
 	force = 11
 
 /obj/item/gun/projectile/shotgun/doublebarrel/nitro
@@ -224,7 +226,7 @@
 	load_method = SINGLE_CASING|SPEEDLOADER
 	handle_casings = CYCLE_CASINGS
 	max_shells = 2
-	w_class = ITEMSIZE_LARGE
+	w_class = WEIGHT_CLASS_BULKY
 	force = 10
 	obj_flags = OBJ_FLAG_CONDUCTABLE
 	is_wieldable = TRUE
@@ -246,7 +248,7 @@
 	item_state = "overunder"
 	accuracy = 0
 	slot_flags = SLOT_BELT
-	w_class = ITEMSIZE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	load_method = SINGLE_CASING|SPEEDLOADER
 	max_shells = 1
@@ -271,7 +273,7 @@
 		slot_flags = initial(slot_flags)
 		playsound(user, 'sound/weapons/sawclose.ogg', 60, 1)
 	else
-		w_class = ITEMSIZE_LARGE
+		w_class = WEIGHT_CLASS_BULKY
 		slot_flags &= ~SLOT_BELT
 		playsound(user, 'sound/weapons/sawopen.ogg', 60, 1)
 	to_chat(user, "You [folded ? "fold" : "unfold"] \the [src].")
@@ -293,7 +295,7 @@
 	icon_state = "cameragun"
 	item_state = "cameragun"
 	slot_flags = SLOT_BELT
-	w_class = ITEMSIZE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
 	magazine_type = /obj/item/ammo_magazine/mc9mm
 	allowed_magazines = list(/obj/item/ammo_magazine/mc9mm)
 	fire_delay = ROF_PISTOL
@@ -320,7 +322,7 @@
 	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/shotgun/moghes
 	load_method = SINGLE_CASING|SPEEDLOADER
-	w_class = ITEMSIZE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
 	fire_delay = ROF_INTERMEDIATE
 	force = 5
 	max_shells = 1
@@ -365,7 +367,7 @@
 			if(H.mob_size <10)
 				H.visible_message(SPAN_WARNING("\The [src] flies out of \the [H]'s' hand!"), SPAN_WARNING("\The [src] flies out of your hand!"))
 				H.drop_item(src)
-				src.throw_at(get_edge_target_turf(src, GLOB.reverse_dir[H.dir]), 4, 4)
+				src.throw_at(get_edge_target_turf(src, REVERSE_DIR(H.dir)), 4, 4)
 
 				var/obj/item/organ/external/LH = H.get_organ(BP_L_HAND)
 				var/obj/item/organ/external/RH = H.get_organ(BP_R_HAND)

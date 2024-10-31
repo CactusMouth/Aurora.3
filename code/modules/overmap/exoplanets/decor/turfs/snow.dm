@@ -17,10 +17,11 @@
 	pixel_x = -4
 	pixel_y = -4
 	icon_state = pick("snow[rand(1,2)]","snow0","snow0")
-	SSicon_smooth.add_to_queue_neighbors(src)
-	SSicon_smooth.add_to_queue(src)
+	QUEUE_SMOOTH_NEIGHBORS(src)
+	QUEUE_SMOOTH(src)
 
-/turf/simulated/floor/exoplanet/snow/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/turf/simulated/floor/exoplanet/snow/fire_act(exposed_temperature, exposed_volume)
+	. = ..()
 	melt()
 
 /turf/simulated/floor/exoplanet/snow/melt()

@@ -6,9 +6,9 @@
 	if(!client) return
 	client.inquisitive_ghost = !client.inquisitive_ghost
 	if(client.inquisitive_ghost)
-		to_chat(src, "<span class='notice'>You will now examine everything you click on.</span>")
+		to_chat(src, SPAN_NOTICE("You will now examine everything you click on."))
 	else
-		to_chat(src, "<span class='notice'>You will no longer examine things you click on.</span>")
+		to_chat(src, SPAN_NOTICE("You will no longer examine things you click on."))
 
 /mob/abstract/observer/DblClickOn(var/atom/A, var/params)
 	if(can_reenter_corpse && mind && mind.current)
@@ -16,13 +16,14 @@
 			reenter_corpse()						// (cloning scanner, body bag, closet, mech, etc)
 			return									// seems legit.
 
+	orbiting?.end_orbit(src) // stop orbiting
+
 	// Things you might plausibly want to follow
 	if((ismob(A) && A != src) || istype(A,/obj/machinery/bot) || istype(A,/obj/singularity))
 		ManualFollow(A)
 
 	// Otherwise jump
 	else
-		stop_following()
 		forceMove(get_turf(A))
 
 /mob/abstract/observer/ClickOn(var/atom/A, var/params)

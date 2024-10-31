@@ -15,6 +15,7 @@
 	var/icon_screen = "computer_generic"
 	var/icon_scanline
 	var/icon_keyboard = "green_key"
+	var/icon_keyboard_emis = "green_key_mask"
 	var/light_range_on = 2
 	var/light_power_on = 1.3
 	var/overlay_layer
@@ -24,14 +25,18 @@
 	var/has_off_keyboards = FALSE
 	var/can_pass_under = TRUE
 
+	// The zlevel that this computer is spawned on.
+	var/starting_z_level = null
+
 /obj/machinery/computer/Initialize()
 	. = ..()
 	overlay_layer = layer
+	starting_z_level = src.z
 	power_change()
 	update_icon()
 
 /obj/machinery/computer/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = TRUE)
-	if(inoperable() || isNotStationLevel(z) || user.stat)
+	if(!operable() || !is_station_level(z) || user.stat)
 		user.unset_machine()
 		return
 
@@ -62,10 +67,13 @@
 				set_broken()
 	return
 
-/obj/machinery/computer/bullet_act(var/obj/item/projectile/Proj)
-	if(prob(Proj.get_structure_damage()))
+/obj/machinery/computer/bullet_act(obj/projectile/hitting_projectile, def_zone, piercing_hit)
+	. = ..()
+	if(. != BULLET_ACT_HIT)
+		return .
+
+	if(prob(hitting_projectile.get_structure_damage()))
 		set_broken()
-	..()
 
 /obj/machinery/computer/update_icon()
 	switch(dir)
@@ -109,7 +117,26 @@
 			AddOverlays(icon_broken)
 	else if (icon_screen)
 		if (is_holographic)
-			holographic_overlay(src, src.icon, icon_screen)
+			var/mutable_appearance/screen_overlay = overlay_image(src.icon, icon_screen)
+			var/mutable_appearance/screen_overlay_holographic = overlay_image(src.icon, icon_screen)
+			screen_overlay_holographic.filters += filter(type="color", color=list(
+				0, 0, 0, 0,
+				0, 0, 0, 0,
+				0, 0, 0, 0,
+				HOLOSCREEN_MULTIPLICATION_FACTOR, HOLOSCREEN_MULTIPLICATION_FACTOR, HOLOSCREEN_MULTIPLICATION_FACTOR, HOLOSCREEN_MULTIPLICATION_OPACITY
+			))
+			screen_overlay.filters += filter(type="color", color=list(
+				HOLOSCREEN_ADDITION_OPACITY, 0, 0, 0,
+				0, HOLOSCREEN_ADDITION_OPACITY, 0, 0,
+				0, 0, HOLOSCREEN_ADDITION_OPACITY, 0,
+				0, 0, 0, 1
+			))
+			screen_overlay.blend_mode = BLEND_ADD
+			screen_overlay_holographic.blend_mode = BLEND_MULTIPLY
+			var/mutable_appearance/screen_overlay_emis = emissive_appearance(src.icon, icon_screen)
+			AddOverlays(screen_overlay_holographic)
+			AddOverlays(screen_overlay)
+			AddOverlays(screen_overlay_emis)
 		if (icon_scanline)
 			AddOverlays(icon_scanline)
 		if (icon_keyboard)
@@ -117,6 +144,9 @@
 				AddOverlays("[icon_keyboard]_off")
 			else
 				AddOverlays(icon_keyboard)
+				if(icon_keyboard_emis)
+					var/mutable_appearance/emis = emissive_appearance(icon, icon_keyboard_emis)
+					AddOverlays(emis)
 		else if (overlay_layer != layer)
 			AddOverlays(image(icon, icon_screen, overlay_layer))
 		else
@@ -174,14 +204,16 @@
 /obj/machinery/computer/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if (!mover)
 		return 1
-	if(istype(mover,/obj/item/projectile) && density && is_holographic)
+	if(mover?.movement_type & PHASING)
+		return TRUE
+	if(istype(mover,/obj/projectile) && density && is_holographic)
 		if (prob(80))
 //Holoscreens are non solid, and the frames of the computers are thin. So projectiles will usually
 //pass through
 			return 1
 		else
 			return 0
-	else if(mover.checkpass(PASSTABLE) && can_pass_under)
+	else if((mover.pass_flags & PASSTABLE) && can_pass_under)
 //Animals can run under them, lots of empty space
 		return 1
 	return ..()

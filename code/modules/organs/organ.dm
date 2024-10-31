@@ -137,7 +137,7 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 /obj/item/organ/proc/can_recover()
 	return (max_damage > 0) && !(status & ORGAN_DEAD) || death_time >= world.time - ORGAN_RECOVERY_THRESHOLD
 
-/obj/item/organ/process()
+/obj/item/organ/process(seconds_per_tick)
 	if(loc != owner)
 		owner = null
 
@@ -211,7 +211,7 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 /obj/item/organ/get_examine_text(mob/user, distance, is_adjacent, infix, suffix)
 	. = ..()
 	if(status & ORGAN_DEAD)
-		. += "<span class='notice'>The decay has set in.</span>"
+		. += SPAN_NOTICE("The decay has set in.")
 
 /obj/item/organ/proc/handle_germ_effects()
 	//** Handle the effects of infections
@@ -389,6 +389,8 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 			name = "pacemaker-assisted [initial(name)]"
 		if(BP_EYES)
 			name = "retinal overlayed [initial(name)]"
+		if(BP_BRAIN)
+			name = "positronic-implanted [initial(name)]"
 		else
 			name = "mechanically assisted [initial(name)]"
 	icon_state = initial(icon_state)
@@ -401,7 +403,7 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 
 	var/organ_fragility = 0.5
 
-	if((status & ORGAN_ROBOT))	//fully robotic organs take the normal emp damage, assited ones only suffer half of it
+	if((status & ORGAN_ROBOT))	//fully robotic organs take the normal emp damage, assisted ones only suffer half of it
 		organ_fragility = 1
 
 	switch (severity)
@@ -417,7 +419,7 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 	if(!(status & ORGAN_ASSISTED))
 		return //We check earlier, but just to make sure.
 
-	surge_damage = Clamp(0, surge + surge_damage, MAXIMUM_SURGE_DAMAGE) //We want X seconds at most of hampered movement or what have you.
+	surge_damage = clamp(0, surge + surge_damage, MAXIMUM_SURGE_DAMAGE) //We want X seconds at most of hampered movement or what have you.
 	surge_time = world.time
 
 /obj/item/organ/proc/removed(var/mob/living/carbon/human/target,var/mob/living/user)
@@ -472,13 +474,13 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 		target.update_eyes()
 	..()
 
-/obj/item/organ/attack(var/mob/target, var/mob/user)
+/obj/item/organ/attack(mob/living/target_mob, mob/living/user, target_zone)
 
-	if(robotic || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
+	if(robotic || !istype(target_mob) || !istype(user) || (user != target_mob && user.a_intent == I_HELP))
 		return ..()
 
 	if(alert("Do you really want to use this organ as food? It will be useless for anything else afterwards.",,"No.","Yes.") == "No.")
-		to_chat(user, "<span class='notice'>You successfully repress your cannibalistic tendencies.</span>")
+		to_chat(user, SPAN_NOTICE("You successfully repress your cannibalistic tendencies."))
 		return
 
 	user.drop_from_inventory(src)
@@ -494,7 +496,7 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 		O.fingerprintslast = fingerprintslast
 	user.put_in_active_hand(O)
 	qdel(src)
-	target.attackby(O, user)
+	target_mob.attackby(O, user)
 
 //used by stethoscope
 /obj/item/organ/proc/listen()

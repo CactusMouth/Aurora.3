@@ -86,7 +86,7 @@
 	throw_speed = 0.5
 	icon_state = "chew"
 	type_butt = /obj/item/trash/spitwad
-	w_class = ITEMSIZE_TINY
+	w_class = WEIGHT_CLASS_TINY
 	slot_flags = SLOT_EARS | SLOT_MASK
 	chem_volume = 50
 	chewtime = 300
@@ -165,7 +165,7 @@
 	throw_speed = 0.5
 	icon_state = "chew"
 	type_butt = /obj/item/trash/spitwad
-	w_class = ITEMSIZE_TINY
+	w_class = WEIGHT_CLASS_TINY
 	slot_flags = SLOT_EARS | SLOT_MASK
 	chem_volume = 50
 	chewtime = 300
@@ -178,11 +178,24 @@
 	throw_speed = 0.5
 	icon_state = "chew"
 	type_butt = /obj/item/trash/spitgum
-	w_class = ITEMSIZE_TINY
+	w_class = WEIGHT_CLASS_TINY
 	slot_flags = SLOT_EARS | SLOT_MASK
 	chem_volume = 50
 	chewtime = 300
 	reagents_to_add = list(/singleton/reagent/sugar = 2)
+
+/obj/item/clothing/mask/chewable/chewingkoko
+	name = "wad"
+	desc = "A sweet chewy wad of koko reeds, treated with a persevative syrup."
+	throw_speed = 0.5
+	icon_state = "chew"
+	type_butt = /obj/item/trash/spitwad
+	w_class = WEIGHT_CLASS_TINY
+	slot_flags = SLOT_EARS | SLOT_MASK
+	chem_volume = 50
+	chewtime = 300
+	brand = "koko"
+	reagents_to_add = list(/singleton/reagent/mental/kokoreed = 7)
 
 /obj/item/trash/spitgum
 	name = "old gum"

@@ -26,7 +26,7 @@
 		var/software = english_list(restricted_software, and_text = ", ")
 		. += SPAN_NOTICE("<b>Exosuit Software Requirement:</b> [software]")
 
-/obj/item/mecha_equipment/attack() //Generally it's not desired to be able to attack with items
+/obj/item/mecha_equipment/attack(mob/living/target_mob, mob/living/user, target_zone) //Generally it's not desired to be able to attack with items
 	return 0
 
 /obj/item/mecha_equipment/proc/get_effective_obj()
@@ -45,7 +45,7 @@
 			return 0
 
 		if(!(owner.get_cell()?.check_charge(active_power_use * CELLRATE)))
-			to_chat(user, "<span class='warning'>The power indicator flashes briefly as you attempt to use \the [src].</span>")
+			to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]."))
 			return 0
 		return 1
 	else
@@ -54,7 +54,7 @@
 /obj/item/mecha_equipment/attack_self(var/mob/user)
 	if (owner && loc == owner && ((user in owner.pilots) || user == owner))
 		if(!(owner.get_cell()?.check_charge(active_power_use * CELLRATE)))
-			to_chat(user, "<span class='warning'>The power indicator flashes briefly as you attempt to use \the [src].</span>")
+			to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]."))
 			return 0
 		return 1
 	else

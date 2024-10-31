@@ -4,6 +4,7 @@
 	desc_info = "Click your target with Grab intent, then click on the table with an empty hand, to place them on it."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "table2-idle"
+	pass_flags_self = PASSTABLE
 	density = TRUE
 	anchored = TRUE
 	use_power = POWER_USE_IDLE
@@ -162,12 +163,6 @@
 		user.visible_message(SPAN_NOTICE("\The [user] switches [suppressing ? "on" : "off"] \the [src]'s neural suppressor."), intent_message = BUTTON_FLICK)
 		playsound(loc, /singleton/sound_category/switch_sound, 50, 1)
 
-/obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height = 0, air_group = 0)
-	if(air_group || (height == 0))
-		return FALSE
-
-	return istype(mover) && mover.checkpass(PASSTABLE)
-
 /**
  * Refreshes the icon state based on the table status
  */
@@ -304,9 +299,9 @@
 	else
 		return ..()
 
-/obj/machinery/optable/attackby(obj/item/W, mob/living/carbon/user)
-	if(istype(W, /obj/item/grab))
-		var/obj/item/grab/G = W
+/obj/machinery/optable/attackby(obj/item/attacking_item, mob/user, params)
+	if(istype(attacking_item, /obj/item/grab))
+		var/obj/item/grab/G = attacking_item
 
 		var/mob/living/carbon/human/occupant_resolved = occupant?.resolve()
 		if(occupant_resolved)
@@ -324,11 +319,11 @@
 			user.visible_message(SPAN_NOTICE("\The [user] starts putting \the [L] onto \the [src]."), SPAN_NOTICE("You start putting \the [L] onto \the [src]."), range = 3)
 		if(do_mob(user, L, 10, needhand = FALSE))
 			take_occupant(G.affecting,usr)
-			qdel(W)
+			qdel(attacking_item)
 		return TRUE
-	if(default_deconstruction_screwdriver(user, W))
+	if(default_deconstruction_screwdriver(user, attacking_item))
 		return TRUE
-	if(default_deconstruction_crowbar(user, W))
+	if(default_deconstruction_crowbar(user, attacking_item))
 		return TRUE
-	if(default_part_replacement(user, W))
+	if(default_part_replacement(user, attacking_item))
 		return TRUE

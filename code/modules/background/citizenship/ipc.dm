@@ -1,6 +1,6 @@
 /datum/citizenship/none
 	name = CITIZENSHIP_NONE
-	description = "Not being a citizen of any state is a common situation for owned ipcs and dionae."
+	description = "Not being a citizen of any state is a common situation for owned IPCs and Dionae."
 
 /datum/citizenship/golden_deep
 	name = CITIZENSHIP_GOLDEN
@@ -26,6 +26,7 @@
 			SPECIES_UNATHI,
 			SPECIES_VAURCA_WORKER,
 			SPECIES_VAURCA_WARRIOR,
+			SPECIES_VAURCA_ATTENDANT,
 			SPECIES_VAURCA_BULWARK,
 			SPECIES_VAURCA_BREEDER
 		),
@@ -42,6 +43,7 @@
 			SPECIES_UNATHI,
 			SPECIES_VAURCA_WORKER,
 			SPECIES_VAURCA_WARRIOR,
+			SPECIES_VAURCA_ATTENDANT,
 			SPECIES_VAURCA_BULWARK,
 			SPECIES_VAURCA_BREEDER
 		)

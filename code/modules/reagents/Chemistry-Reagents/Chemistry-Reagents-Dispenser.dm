@@ -7,6 +7,8 @@
 	taste_description = "acid"
 	fallback_specific_heat = 0.567
 
+	value = 0.27
+
 /singleton/reagent/acetone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjustToxLoss(removed * 3)
 
@@ -20,11 +22,11 @@
 		if(amount < 5)
 			return
 		if(istype(O, /obj/item/book/tome))
-			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
+			to_chat(usr, SPAN_NOTICE("The solution does nothing. Whatever this is, it isn't normal ink."))
 			return
 		var/obj/item/book/affectedbook = O
 		affectedbook.dat = null
-		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
+		to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the book."))
 	return
 
 /singleton/reagent/aluminum
@@ -35,6 +37,7 @@
 	taste_description = "metal"
 	taste_mult = 1.1
 	fallback_specific_heat = 0.811
+	value = 0.02
 
 /singleton/reagent/ammonia
 	name = "Ammonia"
@@ -47,6 +50,7 @@
 	breathe_mul = 2
 	breathe_met = REM * 0.25
 	fallback_specific_heat = 1.048
+	value = 0.01
 
 /singleton/reagent/ammonia/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(alien == IS_DIONA)
@@ -83,6 +87,7 @@
 	taste_description = "sour chalk"
 	taste_mult = 1.5
 	fallback_specific_heat = 0.018
+	value = 0.2
 	scannable = TRUE
 
 /singleton/reagent/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -109,6 +114,7 @@
 	color = "#6E3B08"
 	taste_description = "copper"
 	fallback_specific_heat = 1.148
+	value = 0.02
 	scannable = TRUE
 
 /singleton/reagent/copper/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -120,8 +126,7 @@
  *
  * Parent class for all alcoholic reagents, though this one shouldn't be used anywhere
  */
-/singleton/reagent/alcohol
-	abstract_type = /singleton/reagent/alcohol
+ABSTRACT_TYPE(/singleton/reagent/alcohol)
 	name = null
 	description = DESC_PARENT
 	reagent_state = LIQUID
@@ -167,26 +172,7 @@
 	return
 
 /singleton/reagent/alcohol/affect_ingest(mob/living/carbon/M, alien, removed, var/datum/reagents/holder)
-
-	if(alien != IS_DIONA)
-		M.intoxication += (strength / 100) * removed * 6
-
-		if (druggy != 0)
-			M.druggy = max(M.druggy, druggy)
-
-		if (halluci)
-			M.hallucination = max(M.hallucination, halluci)
-
-		if(caffeine)
-			M.add_chemical_effect(CE_PULSE, caffeine*2)
-			M.add_up_to_chemical_effect(CE_SPEEDBOOST, 1)
-
-	if (adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
-		M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
-	if (adj_temp < 0 && M.bodytemperature > targ_temp)
-		M.bodytemperature = min(targ_temp, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
-
-	if(ishuman(M))
+	if(alien != IS_DIONA && ishuman(M))
 		var/has_valid_aug = FALSE
 		var/obj/item/organ/internal/augment/ethanol_burner/aug = M.internal_organs_by_name[BP_AUG_ETHANOL_BURNER]
 		if(aug && !aug.is_broken())
@@ -194,13 +180,26 @@
 
 		var/obj/item/organ/internal/parasite/P = M.internal_organs_by_name["blackkois"]
 		if(!has_valid_aug && (alien == IS_VAURCA || (istype(P) && P.stage >= 3)))//Vaurca are damaged instead of getting nutrients, but they can still get drunk
-			M.adjustToxLoss(1.5 * removed * (strength / 100))
-		else
+			M.adjustToxLoss(3 * removed * (strength / 100))
+
+		if (!has_valid_aug && alien == IS_UNATHI) //unathi are poisoned by alcohol as well
+			M.adjustToxLoss(3 * removed * (strength / 100))
+
+		if (has_valid_aug | alien != IS_UNATHI)
+			M.intoxication += (strength / 100) * removed * 6
+			if (druggy != 0)
+				M.druggy = max(M.druggy, druggy)
+			if (halluci)
+				M.hallucination = max(M.hallucination, halluci)
+			if(caffeine)
+				M.add_chemical_effect(CE_PULSE, caffeine*2)
 			M.adjustNutritionLoss(-nutriment_factor * removed)
 			M.adjustHydrationLoss(-hydration_factor * removed)
 
-		if (!has_valid_aug && alien == IS_UNATHI)//unathi are poisoned by alcohol as well
-			M.adjustToxLoss(1.5 * removed * (strength / 100))
+	if (adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
+		M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
+	if (adj_temp < 0 && M.bodytemperature > targ_temp)
+		M.bodytemperature = min(targ_temp, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 /singleton/reagent/alcohol/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	if(istype(O, /obj/item/paper))
@@ -212,11 +211,11 @@
 		if(amount < 5)
 			return
 		if(istype(O, /obj/item/book/tome))
-			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
+			to_chat(usr, SPAN_NOTICE("The solution does nothing. Whatever this is, it isn't normal ink."))
 			return
 		var/obj/item/book/affectedbook = O
 		affectedbook.dat = null
-		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
+		to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the book."))
 	return
 
 /**
@@ -232,6 +231,8 @@
 
 	distillation_point = T0C + 78.37
 
+	value = 0.01
+
 /**
  * # Butanol
  *
@@ -243,7 +244,7 @@
 	description = "A fairly harmless alcohol that has intoxicating effects on certain species."
 	reagent_state = LIQUID
 	color = "#404030"
-	ingest_met = REM * 0.25 //Extremely slow metabolic rate means the liver will generally purge it faster than it can intoxicate you
+	ingest_met = REM * 2.5
 	flammability_divisor = 7	//Butanol is a bit less flammable than ethanol
 
 	taste_description = "alcohol"
@@ -253,23 +254,33 @@
 	glass_desc = "A fairly harmless alcohol that has intoxicating effects on certain species."
 
 	fallback_specific_heat = 0.549
+	value = 0.02
 
 	distillation_point = T0C + 117.7
 
 /singleton/reagent/alcohol/butanol/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
-	if(!istype(M))
-		return
-	var/obj/item/organ/internal/parasite/P = M.internal_organs_by_name["blackkois"]
-	if((alien == IS_VAURCA) || (istype(P) && P.stage >= 3))
-		M.adjustToxLoss(removed * (strength / 100))
-	else
+	if (alien == IS_UNATHI)
+		M.intoxication += (strength / 100) * removed * 6
+		if (druggy != 0)
+			M.druggy = max(M.druggy, druggy)
+		if (halluci)
+			M.hallucination = max(M.hallucination, halluci)
+		if(caffeine)
+			M.add_chemical_effect(CE_PULSE, caffeine*2)
+			M.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/alcohol/butanol, TRUE, caffeine*2)
+
 		M.adjustNutritionLoss(-nutriment_factor * removed)
 		M.adjustHydrationLoss(-hydration_factor * removed)
 
-	if (alien == IS_UNATHI)
-		ingest_met = initial(ingest_met)*9
+	if (adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
+		M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
+	if (adj_temp < 0 && M.bodytemperature > targ_temp)
+		M.bodytemperature = min(targ_temp, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
-	..()
+/singleton/reagent/alcohol/butanol/final_effect(mob/living/carbon/M, datum/reagents/holder)
+	M.remove_movespeed_modifier(/datum/movespeed_modifier/alcohol/butanol)
+	. = ..()
+
 
 /singleton/reagent/hydrazine
 	name = "Hydrazine"
@@ -281,6 +292,7 @@
 	taste_description = "sweet tasting metal"
 
 	fallback_specific_heat = 0.549 //Unknown
+	value = 0.017
 
 /singleton/reagent/hydrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/obj/item/organ/internal/augment/fuel_cell/aug = M.internal_organs_by_name[BP_AUG_FUEL_CELL]
@@ -311,6 +323,7 @@
 	scannable = TRUE
 
 	fallback_specific_heat = 1.181
+	value = 0.01
 
 /singleton/reagent/iron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if (!(alien & (IS_SKRELL | IS_VAURCA)))
@@ -324,10 +337,11 @@
 	taste_description = "metal"
 
 	fallback_specific_heat = 0.633
+	value = 6
 
 /singleton/reagent/lithium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(M.canmove && !M.restrained() && !(istype(M.loc, /turf/space)))
-		step(M, pick(GLOB.cardinal))
+		step(M, pick(GLOB.cardinals))
 	if(prob(5) && ishuman(M))
 		M.emote(pick("twitch", "drool", "moan"))
 
@@ -345,6 +359,7 @@
 	scannable = TRUE
 
 	fallback_specific_heat = 0.631
+	value = 0.02
 
 /singleton/reagent/mercury/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_NEUROTOXIC, 1*removed)
@@ -373,6 +388,7 @@
 	taste_description = "vinegar"
 
 	fallback_specific_heat = 0.569
+	value = 0.4
 
 /singleton/reagent/potassium
 	name = "Potassium"
@@ -382,6 +398,7 @@
 	taste_description = "sweetness" //potassium is bitter in higher doses but sweet in lower ones.
 
 	fallback_specific_heat = 0.214
+	value = 1
 
 /singleton/reagent/potassium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(REAGENT_VOLUME(holder, type) > 3)
@@ -398,6 +415,8 @@
 	unaffected_species = IS_MACHINE
 
 	fallback_specific_heat = 0.220
+	value = 50 // Radium is crazy expensive, like 100k+ per gram. So probably a bit less expensive in the future.
+
 	var/message_shown = FALSE
 
 /singleton/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -423,6 +442,7 @@
 	taste_description = "acid"
 
 	fallback_specific_heat = 0.815
+	value = 0.2
 
 /singleton/reagent/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.take_organ_damage(0, removed * power)
@@ -436,11 +456,11 @@
 		var/mob/living/carbon/human/H = M
 		if(H.head)
 			if(H.head.unacidable)
-				to_chat(H, "<span class='danger'>Your [H.head] protects you from the acid.</span>")
+				to_chat(H, SPAN_DANGER("Your [H.head] protects you from the acid."))
 				remove_self(REAGENT_VOLUME(holder, type))
 				return
 			else if(removed > meltdose)
-				to_chat(H, "<span class='danger'>Your [H.head] melts away!</span>")
+				to_chat(H, SPAN_DANGER("Your [H.head] melts away!"))
 				qdel(H.head)
 				H.update_inv_head(1)
 				H.update_hair(1)
@@ -450,11 +470,11 @@
 
 		if(H.wear_mask)
 			if(H.wear_mask.unacidable)
-				to_chat(H, "<span class='danger'>Your [H.wear_mask] protects you from the acid.</span>")
+				to_chat(H, SPAN_DANGER("Your [H.wear_mask] protects you from the acid."))
 				remove_self(REAGENT_VOLUME(holder, type))
 				return
 			else if(removed > meltdose)
-				to_chat(H, "<span class='danger'>Your [H.wear_mask] melts away!</span>")
+				to_chat(H, SPAN_DANGER("Your [H.wear_mask] melts away!"))
 				qdel(H.wear_mask)
 				H.update_inv_wear_mask(1)
 				H.update_hair(1)
@@ -464,10 +484,10 @@
 
 		if(H.glasses)
 			if(H.glasses.unacidable)
-				to_chat(H, "<span class='danger'>Your [H.glasses] partially protect you from the acid!</span>")
+				to_chat(H, SPAN_DANGER("Your [H.glasses] partially protect you from the acid!"))
 				removed /= 2
 			else if(removed > meltdose)
-				to_chat(H, "<span class='danger'>Your [H.glasses] melt away!</span>")
+				to_chat(H, SPAN_DANGER("Your [H.glasses] melt away!"))
 				qdel(H.glasses)
 				H.update_inv_glasses(1)
 				removed -= meltdose / 2
@@ -497,7 +517,7 @@
 		var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(get_turf(O))
 		I.desc = "Looks like this was \an [O] some time ago."
 		for(var/mob/M in viewers(get_turf(O), 5))
-			to_chat(M, "<span class='warning'>\The [O] melts.</span>")
+			to_chat(M, SPAN_WARNING("\The [O] melts."))
 		qdel(O)
 		remove_self(meltdose, holder) // 10 units of acid will not melt EVERYTHING on the tile
 
@@ -519,12 +539,14 @@
 	power = 6
 	meltdose = 4
 	taste_description = "acid"
+	value = 2
 
 /singleton/reagent/acid/stomach
 	name = "Stomach Acid"
 	taste_description = "coppery foulness"
 	power = 2
 	color = "#d8ff00"
+	value = 0
 
 /singleton/reagent/silicon
 	name = "Silicon"
@@ -541,6 +563,7 @@
 	color = COLOR_GRAY
 	taste_description = "salty metal"
 	fallback_specific_heat = 0.483
+	value = 0.1
 
 /singleton/reagent/sugar
 	name = "Sugar"
@@ -555,6 +578,8 @@
 	glass_desc = "You can feel your blood sugar rising just looking at this."
 
 	fallback_specific_heat = 0.332
+	value = 0.1
+
 	condiment_name = "sugar sack"
 	condiment_desc = "Tasty space sugar!"
 	condiment_icon_state = "sugar"
@@ -571,6 +596,7 @@
 	scannable = TRUE
 
 	fallback_specific_heat = 0.503
+	value = 2
 
 /singleton/reagent/sulfur/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if (alien & IS_VAURCA)
@@ -582,6 +608,5 @@
 	reagent_state = SOLID
 	color = "#DCDCDC"
 	taste_mult = 0 //no taste
-	fallback_specific_heat = 18
 
 	fallback_specific_heat = 0.859

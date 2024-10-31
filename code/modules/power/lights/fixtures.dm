@@ -248,11 +248,9 @@
 
 			if (on)
 				var/image/I = LIGHT_FIXTURE_CACHE(icon, "[base_state]_on", target_color)
-				if (!fitting_is_on_floor)
-					I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-				else
-					I.plane = plane
+				var/image/E = emissive_appearance(icon, "[base_state]_on")
 				AddOverlays(I)
+				AddOverlays(E)
 			else
 				AddOverlays(LIGHT_FIXTURE_CACHE(icon, "[base_state]_off", target_color))
 
@@ -509,8 +507,12 @@
 	else
 		user.visible_message(SPAN_WARNING("\The [user] hits \the [src], but it doesn't break."), SPAN_WARNING("You hit \the [src], but it doesn't break."), SPAN_WARNING("You hear something hitting against glass."))
 
-/obj/machinery/light/bullet_act(obj/item/projectile/P, def_zone)
-	bullet_ping(P)
+/obj/machinery/light/bullet_act(obj/projectile/hitting_projectile, def_zone, piercing_hit)
+	. = ..()
+	if(. != BULLET_ACT_HIT)
+		return .
+
+	bullet_ping(hitting_projectile)
 	shatter()
 
 // returns whether this light has power
@@ -697,7 +699,9 @@
 
 // called when on fire
 
-/obj/machinery/light/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/machinery/light/fire_act(exposed_temperature, exposed_volume)
+	. = ..()
+
 	if(prob(max(0, exposed_temperature - 673)))   //0% at <400C, 100% at >500C
 		broken()
 

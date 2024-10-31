@@ -41,7 +41,7 @@
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_SIIK_MAAS, LANGUAGE_SIIK_TAJR, LANGUAGE_YA_SSA)
 	name_language = LANGUAGE_SIIK_MAAS
-	ethanol_resistance = 0.8//Gets drunk a little faster
+	ethanol_resistance = 0.9//Gets drunk a little faster
 	rarity_value = 2
 	economic_modifier = 7
 	selectable_pronouns = list(MALE, FEMALE)
@@ -86,13 +86,13 @@
 
 	reagent_tag = IS_TAJARA
 
-	heat_discomfort_level = 292
+	heat_discomfort_level = 292 //18°C
 	heat_discomfort_strings = list(
 		"Your fur prickles in the heat.",
 		"You feel uncomfortably warm.",
 		"Your overheated skin itches."
 	)
-	cold_discomfort_level = 275
+	cold_discomfort_level = 275 //1°C
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
 

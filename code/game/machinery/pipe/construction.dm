@@ -10,7 +10,7 @@
 	icon_state = "simple"
 	item_state = "buildpipe"
 	randpixel = 5
-	w_class = ITEMSIZE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
 	level = 2
 	obj_flags = OBJ_FLAG_ROTATABLE
 
@@ -405,7 +405,7 @@
 /obj/item/pipe/Move()
 	..()
 	if ((pipe_type in list (PIPE_SIMPLE_BENT, PIPE_SUPPLY_BENT, PIPE_SCRUBBERS_BENT, PIPE_FUEL_BENT, PIPE_AUX_BENT, PIPE_HE_BENT)) \
-		&& (src.dir in GLOB.cardinal))
+		&& (src.dir in GLOB.cardinals))
 		src.set_dir(src.dir|turn(src.dir, 90))
 	else if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_FUEL_STRAIGHT, PIPE_AUX_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_MVALVE))
 		if(dir==2)
@@ -580,11 +580,11 @@
 
 	for(var/obj/machinery/atmospherics/M in src.loc)
 		if((M.initialize_directions & pipe_dir) && M.check_connect_types_construction(M,src))	// matches at least one direction on either type of pipe & same connection type
-			to_chat(user, "<span class='warning'>There is already a pipe of the same type at this location.</span>")
+			to_chat(user, SPAN_WARNING("There is already a pipe of the same type at this location."))
 			return TRUE
 	// no conflicts found
 
-	var/pipefailtext = "<span class='warning'>There's nothing to connect this pipe section to!</span>" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+	var/pipefailtext = SPAN_WARNING("There's nothing to connect this pipe section to!") //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
 
 	//TODO: Move all of this stuff into the various pipe constructors.
 	switch(pipe_type)
@@ -1520,7 +1520,7 @@
 	attacking_item.play_tool_sound(get_turf(src), 50)
 	user.visible_message( \
 		"[user] fastens the [src].", \
-		"<span class='notice'>You have fastened the [src].</span>", \
+		SPAN_NOTICE("You have fastened the [src]."), \
 		"You hear ratchet.")
 	qdel(src)	// remove the pipe item
 
@@ -1537,16 +1537,16 @@
 	icon = 'icons/obj/pipe-item.dmi'
 	icon_state = "meter"
 	item_state = "buildpipe"
-	w_class = ITEMSIZE_LARGE
+	w_class = WEIGHT_CLASS_BULKY
 
 /obj/item/pipe_meter/attackby(obj/item/attacking_item, mob/user)
 	if (attacking_item.iswrench())
 		if(!locate(/obj/machinery/atmospherics/pipe, src.loc))
-			to_chat(user, "<span class='warning'>You need to fasten it to a pipe</span>")
+			to_chat(user, SPAN_WARNING("You need to fasten it to a pipe"))
 			return 1
 		new/obj/machinery/meter( src.loc )
 		attacking_item.play_tool_sound(get_turf(src), 50)
-		to_chat(user, "<span class='notice'>You have fastened the meter to the pipe</span>")
+		to_chat(user, SPAN_NOTICE("You have fastened the meter to the pipe"))
 		qdel(src)
 		return TRUE
 	return ..()

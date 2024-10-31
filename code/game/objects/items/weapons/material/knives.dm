@@ -25,13 +25,13 @@
 	. = ..()
 	src.add_blood()
 
-/obj/item/material/knife/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob, var/target_zone)
+/obj/item/material/knife/attack(mob/living/target_mob, mob/living/user, target_zone)
 	if(active == 1)
-		if((target_zone != BP_EYES && target_zone != BP_HEAD) || M.eyes_protected(src, FALSE))
+		if((target_zone != BP_EYES && target_zone != BP_HEAD) || target_mob.eyes_protected(src, FALSE))
 			return ..()
 		if((user.is_clumsy()) && prob(50))
-			M = user
-		return eyestab(M,user)
+			target_mob = user
+		return eyestab(target_mob,user)
 
 /obj/item/material/knife/verb/extract_embedded(var/mob/living/carbon/human/H as mob in view(1))
 	set name = "Extract Embedded Item"
@@ -55,9 +55,9 @@
 	var/obj/item/organ/external/O = available_organs[choice]
 	for(var/thing in O.implants)
 		var/obj/S = thing
-		usr.visible_message("<span class='notice'>[usr] starts carefully digging out something in [H == usr ? "themselves" : H]...</span>")
+		usr.visible_message(SPAN_NOTICE("[usr] starts carefully digging out something in [H == usr ? "themselves" : H]..."))
 		O.take_damage(8, 0, DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE, src)
-		H.custom_pain("<font size=3><span class='danger'>It burns!</span></font>", 50)
+		H.custom_pain(SPAN_DANGER("<font size=3>It burns!</font>"), 50)
 		if(do_mob(usr, H, 100))
 			H.remove_implant(S, FALSE)
 			log_and_message_admins("has extracted [S] out of [key_name(H)]")
@@ -94,7 +94,7 @@
 	applies_material_colour = 0
 	force_divisor = 0.35
 	can_embed = 0
-	w_class = ITEMSIZE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/material/knife/bayonet/silver/Initialize(newloc, material_key)
 	. = ..(newloc, MATERIAL_SILVER)
@@ -116,7 +116,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "trench"
 	item_state = "knife"
-	w_class = ITEMSIZE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
 	applies_material_colour = 0
 	slot_flags = SLOT_BELT
 
@@ -142,10 +142,11 @@
 		)
 	hitsound = null
 	active = 0
-	w_class = ITEMSIZE_SMALL
+	w_class = WEIGHT_CLASS_SMALL
 	attack_verb = list("patted", "tapped")
 	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
+	worth_multiplier = 8
 
 /obj/item/material/knife/butterfly/update_force()
 	if(active)
@@ -156,7 +157,7 @@
 		icon_state += "_open"
 		item_state = icon_state
 		hitsound = 'sound/weapons/bladeslice.ogg'
-		w_class = ITEMSIZE_NORMAL
+		w_class = WEIGHT_CLASS_NORMAL
 		attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	else
 		force = 3
@@ -178,10 +179,10 @@
 /obj/item/material/knife/butterfly/attack_self(mob/user)
 	active = !active
 	if(active)
-		to_chat(user, "<span class='notice'>You flip out \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You flip out \the [src]."))
 		playsound(user, 'sound/weapons/blade_open.ogg', 15, 1)
 	else
-		to_chat(user, "<span class='notice'>\The [src] can now be concealed.</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] can now be concealed."))
 		playsound(user, 'sound/weapons/blade_close.ogg', 15, 1)
 	update_force()
 	add_fingerprint(user)
