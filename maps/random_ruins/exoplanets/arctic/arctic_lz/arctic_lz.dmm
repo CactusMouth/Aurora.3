@@ -438,6 +438,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
+/mob/living/simple_animal/hostile/sol_bot,
 /turf/simulated/floor/tiled/techfloor,
 /area/arctic_lz/engineering)
 "hx" = (
@@ -540,6 +541,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/effect/decal/cleanable/dirt,
+/mob/living/simple_animal/hostile/sol_bot,
 /turf/simulated/floor/tiled/techfloor,
 /area/arctic_lz/quarters)
 "iA" = (
@@ -2235,6 +2237,7 @@
 	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
+/mob/living/simple_animal/hostile/sol_bot,
 /turf/simulated/floor/tiled/techfloor,
 /area/arctic_lz/command)
 "MM" = (
