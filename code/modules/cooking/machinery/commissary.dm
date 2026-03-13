@@ -40,6 +40,7 @@
 	)
 	display_tiers = 5
 	display_tier_amt = 3
+	has_emissive = FALSE
 
 /obj/machinery/smartfridge/tradeshelf/clothing
 	name = "clothing shelf"
@@ -48,7 +49,9 @@
 	contents_path = "-clothing"
 	accepted_items = list(/obj/item/storage/backpack,
 	/obj/item/storage/belt,
-	/obj/item/clothing
+	/obj/item/clothing,
+	/obj/item/storage/briefcase,
+	/obj/item/cane
 	)
 	display_tiers = 3
 	display_tier_amt = 5
@@ -82,6 +85,7 @@
 	)
 	display_tiers = 4
 	display_tier_amt = 5
+	has_emissive = TRUE
 
 /obj/machinery/smartfridge/tradeshelf/toy
 	name = "toy shelf"
@@ -105,7 +109,8 @@
 	/obj/item/gun/projectile/revolver/capgun,
 	/obj/item/gun/bang,
 	/obj/item/eightball,
-	/obj/item/bikehorn
+	/obj/item/bikehorn,
+	/obj/item/camera_film
 	)
 	display_tiers = 4
 	display_tier_amt = 5
@@ -128,7 +133,7 @@
 			user.visible_message("<b>[user]</b> loads [src] with [P].", SPAN_NOTICE("You load [src] with [P]."))
 			if(length(P.contents) > 0)
 				to_chat(user, SPAN_NOTICE("Some items are refused."))
-			update_overlays()
+			update_icon()
 		return TRUE
 	. = ..()
 
@@ -154,6 +159,7 @@
 	. += "Alt click with credits in hand, to deposit them."
 	. += "Alt click while having operations access, to withdraw credits from it."
 	. += "Items can be paid for with id cards, charge cards or physical credits, and a receipt will be printed."
+	. += "The register can print a paper which can be used to quickly fill it out in the future by using it on the register."
 
 /obj/structure/cash_register/commissary/Initialize()
 	. = ..()
@@ -188,21 +194,25 @@
 		return
 
 /obj/structure/cash_register/commissary/proc/print_receipt()
-	var/obj/item/paper/R = new(loc)
+	var/obj/item/paper/notepad/receipt/R = new(loc)
 	var/receiptname = "Receipt: [machine_id]"
 	R.set_content_unsafe(receiptname, receipt, sum)
 
 	//stamp the paper
 	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-	stampoverlay.icon_state = "paper_stamp-cent"
+	stampoverlay.icon_state = "paper_stamp-hop"
 	if(!R.stamped)
 		R.stamped = new
 	R.stamped += /obj/item/stamp
 	R.AddOverlays(stampoverlay)
 	R.stamps += "<HR><i>This paper has been stamped by the Idris Quik-Pay Register.</i>"
 	usr.put_in_any_hand_if_possible(R)
+	R.ripped = TRUE
 
 /obj/structure/cash_register/commissary/attackby(obj/item/attacking_item, mob/user)
+	if(istype(attacking_item, /obj/item/paper))
+		read_paper_list(attacking_item, user)
+		return
 	if(sum == 0)
 		return
 	if (istype(attacking_item, /obj/item/spacecash/ewallet))
@@ -254,9 +264,9 @@
 	if(transaction)
 		to_chat(user, SPAN_NOTICE("[icon2html(src, user)]<span class='warning'>[transaction].</span>"))
 	else
-		playsound(src, 'sound/machines/chime.ogg', 50, 1)
-		visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] \The [src] chimes."))
 		visible_message("\The [user] swipes a card on \the [src]." )
+		audible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] \The [src] chimes."))
+		playsound(src, 'sound/machines/chime.ogg', 50, 1)
 		print_receipt()
 		sum = 0
 		receipt = ""
@@ -274,8 +284,8 @@
 		E.worth -= transaction_amount
 
 		visible_message("\The [user] swipes a card on \the [src]." )
+		audible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] \The [src] chimes."))
 		playsound(src, 'sound/machines/chime.ogg', 50, 1)
-		src.audible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] \The [src] chimes."))
 		print_receipt()
 		sum = 0
 		receipt = ""
@@ -284,6 +294,18 @@
 	else if (transaction_amount > E.worth)
 		to_chat(user, SPAN_WARNING("[icon2html(src, user)]\The [E] doesn't have that much money!"))
 	return
+
+/obj/structure/cash_register/commissary/proc/read_paper_list(obj/item/paper/R, mob/user)
+	if(!editmode)
+		balloon_alert(user, "device locked!")
+		return FALSE
+	var/result = read_paper_price_list(R)
+	for(var/item in result)
+		items += list(list("name" = item["name"], "price" = item["price"]))
+		items_to_price[item["name"]] += item["price"]
+
+/obj/structure/cash_register/commissary/proc/print_price(mob/user)
+	return print_price_to_paper(shop_name, items, loc, user)
 
 /obj/structure/cash_register/commissary/attack_hand(mob/living/user)
 	. = ..()
@@ -315,7 +337,7 @@
 	switch(action)
 		if("add")
 			if(!editmode)
-				to_chat(usr, SPAN_WARNING("Device locked."))
+				balloon_alert(usr, "device locked!")
 				return FALSE
 
 			items += list(list("name" = new_item, "price" = new_price))
@@ -324,7 +346,7 @@
 
 		if("remove")
 			if(!editmode)
-				to_chat(usr, SPAN_NOTICE("Device locked."))
+				balloon_alert(usr, "device locked!")
 				return FALSE
 			var/index = 0
 			for(var/list/L in items)
@@ -386,7 +408,7 @@
 		if("locking")
 			if(editmode)
 				editmode = FALSE
-				to_chat(usr, SPAN_NOTICE("Device locked."))
+				balloon_alert(usr, "device locked!")
 			else
 				if(!editmode)
 					var/obj/item/card/id/I = usr.GetIdCard()
@@ -394,19 +416,26 @@
 						return
 					if(check_access(I))
 						editmode = !editmode
-						to_chat(usr, SPAN_NOTICE("Device [editmode ? "un" : ""]locked."))
+						balloon_alert(usr, "device [editmode ? "un" : ""]locked")
 			. = TRUE
 
 		if("accountselect")
 			if(!editmode)
-				to_chat(usr, SPAN_WARNING("Device locked."))
+				balloon_alert(usr, "device locked!")
 				return FALSE
 
 			var/dest = tgui_input_list(usr, "What account would you like to select?", "Destination Account", assoc_to_keys(SSeconomy.department_accounts))
 			if(!dest)
 				return FALSE
 			destinationact = dest
-			return TRUE
+			. = TRUE
+
+		if("print_dsv")
+			if(!editmode)
+				balloon_alert(usr, "device locked!")
+				return FALSE
+			print_price(usr)
+			. = TRUE
 
 /obj/structure/cash_register/commissary/proc/clear_order()
 	buying.Cut()
