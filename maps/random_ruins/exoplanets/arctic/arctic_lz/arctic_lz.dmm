@@ -1130,9 +1130,7 @@
 /area/shuttle/sol_interceptor)
 "uA" = (
 /obj/machinery/turretid/lethal{
-	ailock = 1;
 	check_synth = 1;
-	desc = "A firewall prevents AIs from interacting with this device.";
 	name = "Site turrets control";
 	pixel_x = 28;
 	pixel_y = -2;
