@@ -3,7 +3,7 @@
 	id = "arctic_lz"
 	description = "A long abandoned solarian outpost."
 
-	sectors = list(ALL_CRESCENT_EXPANSE_SECTORS, ALL_VOID_SECTORS, SECTOR_WEEPING_STARS, SECTOR_BADLANDS, SECTOR_VALLEY_HALE)
+	sectors = list(ALL_CRESCENT_EXPANSE_SECTORS, ALL_VOID_SECTORS, SECTOR_WEEPING_STARS, SECTOR_BADLANDS, SECTOR_VALLEY_HALE, SECTOR_CRESCENT_EXPANSE_WEST, SECTOR_CRESCENT_EXPANSE_EAST)
 
 	prefix = "arctic/arctic_lz/"
 	suffix = "arctic_lz.dmm"
