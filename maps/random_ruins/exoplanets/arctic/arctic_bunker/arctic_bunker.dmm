@@ -47,25 +47,9 @@
 /turf/simulated/floor/exoplanet/snow/cold,
 /area/template_noop)
 "bm" = (
-/obj/effect/decal/fake_object{
-	icon = 'icons/obj/item/landmine/mine.dmi';
-	icon_state = "landmine";
-	desc = "An anti-personnel explosive device used for area denial. This one seems to be inactive after so many years.";
-	name = "old land mine"
-	},
+/obj/item/landmine/frag/deployed,
 /turf/simulated/floor/exoplanet/snow/cold,
 /area/template_noop)
-"bD" = (
-/obj/machinery/porta_turret/ballistic{
-	light_range = 1
-	},
-/obj/machinery/light/small/red{
-	dir = 1
-	},
-/obj/effect/floor_decal/industrial/warning/full,
-/obj/effect/floor_decal/industrial/outline/red,
-/turf/simulated/floor/tiled/dark/full,
-/area/arctic_bunker)
 "bG" = (
 /obj/machinery/door/firedoor/noid,
 /obj/machinery/door/airlock/highsecurity{
@@ -106,12 +90,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/arctic_bunker)
 "cP" = (
-/obj/machinery/turretid/lethal{
-	dir = 8;
-	name = "Bunker Turrets Control";
-	pixel_x = 32;
-	req_access = null
-	},
 /obj/machinery/button/remote/blast_door{
 	dir = 1;
 	pixel_x = -6;
@@ -346,11 +324,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/arctic_bunker)
 "ka" = (
-/obj/structure/sign/securearea{
-	desc = "A warning sign which reads 'KEEP CLEAR OF DOCKING AREA'.";
-	name = "SECURE AREA: MINE FIELD"
+/obj/structure/road_sign/yield{
+	name = "WARNING: MINES!";
+	desc = "A yield mine, it's signalling to you that there are landmines in the area."
 	},
-/turf/simulated/wall/r_wall,
+/turf/simulated/floor/exoplanet/snow/cold,
 /area/template_noop)
 "kj" = (
 /obj/machinery/sleeper{
@@ -449,13 +427,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/arctic_bunker)
 "lY" = (
-/obj/effect/floor_decal/industrial/warning/full,
-/obj/effect/floor_decal/industrial/outline/red,
-/obj/machinery/porta_turret/ballistic{
-	light_range = 1;
-	health = 0
-	},
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/bunk_bed/black,
 /turf/simulated/floor/tiled/dark/full,
 /area/arctic_bunker)
 "ma" = (
@@ -690,16 +663,21 @@
 /turf/simulated/floor/tiled/dark,
 /area/arctic_bunker)
 "tr" = (
-/obj/machinery/porta_turret/ballistic{
-	light_range = 1;
-	health = 0
-	},
-/obj/machinery/light/small/red{
-	dir = 1
-	},
 /obj/effect/floor_decal/industrial/warning/full,
 /obj/effect/floor_decal/industrial/outline/red,
-/turf/simulated/floor/tiled/dark/full,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/porta_turret/ballistic{
+	cover_set = 1;
+	health = 120;
+	icon_state = "cover_1";
+	maxhealth = 120
+	},
+/obj/machinery/light/small/decayed{
+	name = "light fixture";
+	dir = 1;
+	pixel_y = 6
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/arctic_bunker)
 "ul" = (
 /obj/machinery/bodyscanner{
@@ -921,17 +899,6 @@
 /turf/simulated/floor/tiled/dark/full,
 /area/arctic_bunker)
 "Bu" = (
-/obj/structure/bed/padded{
-	name = "bottom bunk"
-	},
-/obj/structure/bed/padded{
-	pixel_y = 14;
-	name = "top bunk"
-	},
-/obj/item/bedsheet/black,
-/obj/item/bedsheet/black{
-	pixel_y = 13
-	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark/full,
 /area/arctic_bunker)
@@ -1030,23 +997,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/arctic_bunker)
 "Fg" = (
-/obj/structure/bed/padded{
-	name = "bottom bunk"
-	},
-/obj/structure/bed/padded{
-	pixel_y = 14;
-	name = "top bunk"
-	},
-/obj/item/bedsheet/black,
-/obj/item/bedsheet/black{
-	pixel_y = 13
+/obj/structure/bunk_bed/black{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/full,
 /area/arctic_bunker)
-"Fh" = (
-/obj/item/landmine/frag,
-/turf/simulated/floor/exoplanet/snow/cold,
-/area/template_noop)
 "Fm" = (
 /obj/effect/decal/cleanable/floor_damage,
 /turf/simulated/floor/tiled/dark,
@@ -1404,13 +1359,16 @@
 /turf/simulated/floor/tiled/dark,
 /area/arctic_bunker)
 "Py" = (
-/obj/machinery/porta_turret/ballistic{
-	light_range = 1
-	},
 /obj/effect/floor_decal/industrial/warning/full,
 /obj/effect/floor_decal/industrial/outline/red,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/dark/full,
+/obj/machinery/porta_turret/ballistic{
+	cover_set = 1;
+	health = 120;
+	icon_state = "cover_1";
+	maxhealth = 120
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/arctic_bunker)
 "PA" = (
 /turf/simulated/floor/tiled/ramp/bottom,
@@ -1495,10 +1453,6 @@
 	dir = 9
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/device/gps{
-	pixel_y = 12;
-	pixel_x = 4
-	},
 /turf/simulated/floor/tiled/dark,
 /area/arctic_bunker)
 "QL" = (
@@ -1758,7 +1712,6 @@
 /obj/structure/closet/crate/tool,
 /obj/item/clothing/head/welding,
 /obj/item/clothing/gloves/yellow,
-/obj/item/device/multitool,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
 /area/arctic_bunker)
@@ -1820,6 +1773,12 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/turretid/lethal{
+	dir = 8;
+	name = "Bunker Turrets Control";
+	pixel_x = 32;
+	req_access = null
+	},
 /turf/simulated/floor/tiled/dark,
 /area/arctic_bunker)
 "Yk" = (
@@ -1849,7 +1808,6 @@
 /area/arctic_bunker)
 "YO" = (
 /obj/structure/table/reinforced/steel,
-/obj/item/device/flashlight/lamp,
 /obj/effect/floor_decal/corner/dark_blue/full,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
@@ -2114,7 +2072,7 @@ Yk
 Yk
 iK
 iK
-Fh
+bm
 bb
 iK
 iK
@@ -2126,7 +2084,7 @@ iK
 iK
 Kd
 iK
-Fh
+bm
 iK
 iK
 iK
@@ -2174,7 +2132,7 @@ iK
 iK
 iK
 iK
-Fh
+bm
 iK
 iK
 DO
@@ -2184,7 +2142,7 @@ iK
 iK
 iK
 iK
-Fh
+bm
 iK
 "}
 (7,1,1) = {"
@@ -2803,7 +2761,7 @@ DK
 dq
 Ql
 Ql
-lY
+Py
 DK
 Xt
 lM
@@ -2819,7 +2777,7 @@ DK
 DK
 DK
 DK
-bD
+tr
 iK
 iK
 iK
@@ -2887,7 +2845,7 @@ iK
 iK
 iK
 iK
-iK
+ka
 "}
 (20,1,1) = {"
 Mj
@@ -3373,7 +3331,7 @@ iK
 iK
 iK
 iK
-iK
+ka
 "}
 (29,1,1) = {"
 Mj
@@ -3831,7 +3789,7 @@ fO
 DK
 Fg
 Bu
-Bu
+lY
 DK
 GA
 DK
@@ -3843,7 +3801,7 @@ Yk
 Yk
 Yk
 iK
-Fh
+bm
 iK
 iK
 iK
@@ -3953,7 +3911,7 @@ iK
 Kd
 iK
 iK
-Fh
+bm
 iK
 Kd
 iK
@@ -3961,7 +3919,7 @@ iK
 iK
 iK
 iK
-Fh
+bm
 iK
 iK
 iK
@@ -4004,7 +3962,7 @@ Yk
 Yk
 iK
 iK
-Fh
+bm
 iK
 iK
 iK
@@ -4020,7 +3978,7 @@ iK
 iK
 iK
 iK
-Fh
+bm
 iK
 "}
 (41,1,1) = {"

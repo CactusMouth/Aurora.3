@@ -5,34 +5,27 @@
 	pixel_x = 9
 	},
 /obj/item/pickaxe,
-/turf/simulated/floor/exoplanet/snow/cold,
+/turf/template_noop,
 /area/template_noop)
 "i" = (
 /obj/structure/bed/stool{
 	dir = 4
 	},
-/turf/simulated/floor/exoplanet/snow/cold,
+/turf/template_noop,
 /area/template_noop)
 "j" = (
 /obj/structure/bed/stool{
 	dir = 8
 	},
-/turf/simulated/floor/exoplanet/snow/cold,
-/area/template_noop)
-"k" = (
-/obj/structure/flora/tree/pine,
-/turf/simulated/floor/exoplanet/snow/cold,
+/turf/template_noop,
 /area/template_noop)
 "m" = (
 /obj/structure/bonfire,
-/turf/simulated/floor/exoplanet/snow/cold,
-/area/template_noop)
-"n" = (
-/turf/simulated/floor/exoplanet/snow/cold,
+/turf/template_noop,
 /area/template_noop)
 "o" = (
 /obj/structure/closet/crate/freezer/rations,
-/turf/simulated/floor/exoplanet/snow/cold,
+/turf/template_noop,
 /area/template_noop)
 "r" = (
 /obj/item/trash/cigbutt,
@@ -44,11 +37,7 @@
 /obj/item/flame/lighter{
 	pixel_x = -7
 	},
-/obj/item/device/flashlight/lantern/on{
-	pixel_y = 16;
-	pixel_x = 11
-	},
-/turf/simulated/floor/exoplanet/snow/cold,
+/turf/template_noop,
 /area/template_noop)
 "z" = (
 /obj/structure/table/wood,
@@ -60,15 +49,10 @@
 	pixel_x = -4;
 	pixel_y = 4
 	},
-/turf/simulated/floor/exoplanet/snow/cold,
-/area/template_noop)
-"A" = (
-/obj/effect/floor_decal/snowrocks,
-/turf/simulated/floor/exoplanet/snow/cold,
+/turf/template_noop,
 /area/template_noop)
 "T" = (
-/obj/structure/flora/rock/snow,
-/turf/simulated/floor/exoplanet/snow/cold,
+/turf/template_noop,
 /area/template_noop)
 "W" = (
 /obj/item/stack/material/wood,
@@ -89,7 +73,7 @@
 /obj/item/stack/material/wood{
 	pixel_y = 6
 	},
-/turf/simulated/floor/exoplanet/snow/cold,
+/turf/template_noop,
 /area/template_noop)
 "Y" = (
 /obj/structure/table/wood,
@@ -100,55 +84,55 @@
 /obj/item/storage/bag/ore{
 	pixel_x = 8
 	},
-/turf/simulated/floor/exoplanet/snow/cold,
+/turf/template_noop,
 /area/template_noop)
 
 (1,1,1) = {"
-n
 T
-n
-n
-n
+T
+T
+T
+T
 "}
 (2,1,1) = {"
-n
-n
+T
+T
 a
-n
-A
+T
+T
 "}
 (3,1,1) = {"
-k
+T
 i
-n
-n
-n
+T
+T
+T
 "}
 (4,1,1) = {"
-n
+T
 m
-n
-n
-n
+T
+T
+T
 "}
 (5,1,1) = {"
 r
 j
-n
-n
+T
+T
 o
 "}
 (6,1,1) = {"
 Y
-n
-A
-n
+T
+T
+T
 W
 "}
 (7,1,1) = {"
 z
-n
-n
-n
-n
+T
+T
+T
+T
 "}

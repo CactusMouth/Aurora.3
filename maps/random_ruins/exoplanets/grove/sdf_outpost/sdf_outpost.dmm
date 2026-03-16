@@ -141,9 +141,8 @@
 /turf/simulated/floor/tiled/full,
 /area/grove_sdf_outpost)
 "jF" = (
-/obj/structure/bed/padded,
-/obj/item/bedsheet/blue,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/bunk_bed/black,
 /turf/simulated/floor/tiled,
 /area/grove_sdf_outpost)
 "kj" = (
@@ -184,9 +183,6 @@
 /turf/simulated/floor/tiled,
 /area/grove_sdf_outpost)
 "lJ" = (
-/obj/structure/bed/padded,
-/obj/structure/bed/padded,
-/obj/item/bedsheet/blue,
 /obj/structure/sign/poster{
 	pixel_x = 32
 	},
