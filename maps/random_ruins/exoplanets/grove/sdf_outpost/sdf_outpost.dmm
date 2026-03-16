@@ -4,31 +4,38 @@
 /turf/simulated/floor/tiled,
 /area/grove_sdf_outpost)
 "bn" = (
+/obj/effect/floor_decal/industrial/warning/full,
+/obj/effect/floor_decal/industrial/outline/red,
+/obj/effect/decal/cleanable/dirt,
 /obj/machinery/porta_turret/ballistic{
-	light_range = 1
+	cover_set = 1;
+	health = 120;
+	icon_state = "cover_1";
+	maxhealth = 120
 	},
-/obj/effect/decal/warning_stripes,
-/obj/machinery/light/small/red{
-	dir = 1
+/obj/machinery/light/small/decayed{
+	name = "light fixture";
+	dir = 1;
+	pixel_y = 6
 	},
-/turf/simulated/floor/tiled/full,
+/turf/simulated/floor/tiled/techfloor,
 /area/grove_sdf_outpost)
 "bq" = (
 /turf/simulated/mineral/random/exoplanet,
-/area/grove_sdf_outpost)
+/area/template_noop)
 "bx" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/turf/simulated/floor/exoplanet/grass/grove,
+/turf/simulated/floor/exoplanet/barren,
 /area/grove_sdf_outpost)
 "da" = (
 /obj/structure/blocker/steel/fence,
 /turf/simulated/floor/exoplanet/barren,
-/area/grove_sdf_outpost)
+/area/template_noop)
 "dr" = (
-/turf/simulated/floor/exoplanet/grass/grove,
-/area/grove_sdf_outpost)
+/turf/template_noop,
+/area/template_noop)
 "dJ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/generic,
@@ -80,7 +87,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/exoplanet/grass/grove,
-/area/grove_sdf_outpost)
+/area/template_noop)
 "hc" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
@@ -159,8 +166,8 @@
 /area/grove_sdf_outpost)
 "ls" = (
 /obj/item/flashlight/maglight/on,
-/turf/simulated/floor/exoplanet/grass/grove,
-/area/grove_sdf_outpost)
+/turf/template_noop,
+/area/template_noop)
 "lG" = (
 /obj/effect/floor_decal/corner_wide/dark_green{
 	dir = 10
@@ -194,12 +201,19 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/turretid/lethal{
+	check_synth = 1;
+	name = "SDF Outpost turrets control";
+	pixel_x = 28;
+	pixel_y = -2;
+	req_access = null
+	},
 /turf/simulated/floor/tiled,
 /area/grove_sdf_outpost)
 "mE" = (
-/obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/exoplanet/grass/grove,
-/area/grove_sdf_outpost)
+/obj/item/landmine/frag/deployed,
+/turf/template_noop,
+/area/template_noop)
 "nD" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/curtain/open/shower,
@@ -276,7 +290,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/exoplanet/barren,
-/area/grove_sdf_outpost)
+/area/template_noop)
 "ri" = (
 /obj/effect/floor_decal/corner_wide/dark_green{
 	dir = 5
@@ -334,7 +348,7 @@
 	pixel_x = 32
 	},
 /turf/simulated/floor/exoplanet/barren,
-/area/grove_sdf_outpost)
+/area/template_noop)
 "tl" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/toilet,
@@ -352,7 +366,7 @@
 "tZ" = (
 /obj/item/stack/rods,
 /turf/simulated/floor/exoplanet/barren,
-/area/grove_sdf_outpost)
+/area/template_noop)
 "uk" = (
 /obj/structure/bed/stool/chair/office/light{
 	dir = 4
@@ -391,19 +405,15 @@
 /turf/simulated/floor/tiled,
 /area/grove_sdf_outpost)
 "vj" = (
-/obj/item/stack/rods,
-/turf/simulated/floor/exoplanet/grass/grove,
-/area/grove_sdf_outpost)
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
 "vC" = (
 /obj/effect/floor_decal/corner_wide/dark_green{
 	dir = 6
 	},
 /obj/effect/decal/cleanable/generic,
 /turf/simulated/floor/tiled,
-/area/grove_sdf_outpost)
-"vO" = (
-/obj/structure/sign/securearea,
-/turf/simulated/wall/r_wall,
 /area/grove_sdf_outpost)
 "vR" = (
 /obj/effect/decal/cleanable/dirt,
@@ -464,7 +474,7 @@
 "zt" = (
 /obj/machinery/light/small/red,
 /turf/simulated/floor/exoplanet/barren,
-/area/grove_sdf_outpost)
+/area/template_noop)
 "zT" = (
 /obj/effect/floor_decal/corner_wide/dark_green{
 	dir = 6
@@ -535,19 +545,14 @@
 /turf/simulated/floor/tiled,
 /area/grove_sdf_outpost)
 "Eh" = (
-/obj/structure/flora/ausbushes/brflowers,
-/turf/simulated/floor/exoplanet/grass/grove,
-/area/grove_sdf_outpost)
+/turf/simulated/floor/exoplanet/barren,
+/area/template_noop)
 "Gp" = (
 /obj/effect/floor_decal/corner_wide/dark_green{
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/full,
-/area/grove_sdf_outpost)
-"Gw" = (
-/obj/structure/flora/tree/grove,
-/turf/simulated/floor/exoplanet/grass/grove,
 /area/grove_sdf_outpost)
 "Gx" = (
 /obj/effect/floor_decal/corner_wide/dark_green{
@@ -606,11 +611,11 @@
 	dir = 8
 	},
 /turf/simulated/floor/exoplanet/barren,
-/area/grove_sdf_outpost)
+/area/template_noop)
 "JO" = (
 /obj/structure/blocker/steel/fence,
 /turf/simulated/floor/exoplanet/grass/grove,
-/area/grove_sdf_outpost)
+/area/template_noop)
 "Kh" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -636,7 +641,7 @@
 "KL" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/exoplanet/barren,
-/area/grove_sdf_outpost)
+/area/template_noop)
 "LG" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/corner_wide/dark_green/full,
@@ -728,7 +733,8 @@
 /obj/machinery/light/small/red{
 	dir = 4
 	},
-/turf/simulated/floor/exoplanet/grass/grove,
+/obj/effect/landmark/clear,
+/turf/template_noop,
 /area/grove_sdf_outpost)
 "Pn" = (
 /obj/effect/decal/cleanable/dirt,
@@ -757,11 +763,12 @@
 /turf/simulated/floor/tiled,
 /area/grove_sdf_outpost)
 "Qk" = (
-/obj/item/landmine/frag{
-	deployed = 1
+/obj/structure/road_sign/yield{
+	name = "WARNING: MINES!";
+	desc = "A yield mine, it's signalling to you that there are landmines in the area."
 	},
-/turf/simulated/floor/exoplanet/grass/grove,
-/area/grove_sdf_outpost)
+/turf/template_noop,
+/area/template_noop)
 "QH" = (
 /obj/effect/floor_decal/corner_wide/dark_green{
 	dir = 10
@@ -823,12 +830,12 @@
 /turf/simulated/wall/r_wall,
 /area/grove_sdf_outpost)
 "RN" = (
-/obj/item/landmine/frag{
-	deployed = 1
+/obj/item/material/shard{
+	pixel_y = -3;
+	pixel_x = 16
 	},
-/obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/exoplanet/grass/grove,
-/area/grove_sdf_outpost)
+/turf/template_noop,
+/area/template_noop)
 "RT" = (
 /obj/machinery/door/airlock/engineering{
 	dir = 8
@@ -880,9 +887,9 @@
 /turf/simulated/floor/exoplanet/barren,
 /area/grove_sdf_outpost)
 "WE" = (
-/obj/structure/flora/tree/jungle,
-/turf/simulated/floor/exoplanet/grass/grove,
-/area/grove_sdf_outpost)
+/obj/item/stack/rods,
+/turf/template_noop,
+/area/template_noop)
 "WL" = (
 /obj/structure/bed/stool{
 	dir = 8
@@ -900,9 +907,11 @@
 /turf/simulated/floor/tiled,
 /area/grove_sdf_outpost)
 "Yu" = (
-/obj/structure/flora/bush/grove,
-/turf/simulated/floor/exoplanet/grass/grove,
-/area/grove_sdf_outpost)
+/obj/item/material/shard{
+	icon_state = "small"
+	},
+/turf/template_noop,
+/area/template_noop)
 "YN" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -917,9 +926,6 @@
 /area/grove_sdf_outpost)
 
 (1,1,1) = {"
-mE
-mE
-mE
 dr
 dr
 dr
@@ -929,9 +935,12 @@ dr
 dr
 dr
 dr
-mE
-mE
-mE
+dr
+dr
+dr
+dr
+dr
+dr
 dr
 dr
 dr
@@ -954,7 +963,6 @@ dr
 dr
 dr
 dr
-Eh
 dr
 dr
 dr
@@ -964,19 +972,20 @@ dr
 dr
 dr
 dr
-mE
 dr
 dr
 dr
-Eh
 dr
 dr
 dr
-Gw
 dr
 dr
-mE
-mE
+dr
+dr
+dr
+dr
+dr
+dr
 dr
 dr
 "}
@@ -984,7 +993,21 @@ dr
 dr
 dr
 dr
-Yu
+dr
+dr
+dr
+Qk
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+Qk
 dr
 dr
 dr
@@ -996,52 +1019,38 @@ dr
 dr
 dr
 dr
-dr
-dr
-dr
-dr
-dr
-dr
-dr
-dr
-dr
-dr
-dr
-dr
-dr
-mE
 dr
 "}
 (4,1,1) = {"
 dr
-vO
-dr
-dr
-dr
-dr
-mE
-dr
-dr
-dr
-dr
-dr
-WE
-dr
-dr
-dr
-dr
-mE
-mE
 dr
 dr
 dr
 dr
 dr
 dr
-mE
 dr
 dr
-mE
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+Qk
+dr
+dr
 dr
 "}
 (5,1,1) = {"
@@ -1051,7 +1060,6 @@ dr
 dr
 dr
 dr
-mE
 dr
 dr
 dr
@@ -1063,16 +1071,17 @@ dr
 dr
 dr
 dr
-mE
-mE
-dr
-Eh
 dr
 dr
 dr
-mE
 dr
-vO
+dr
+dr
+dr
+dr
+dr
+dr
+dr
 dr
 dr
 "}
@@ -1097,9 +1106,9 @@ dr
 dr
 dr
 dr
-mE
 dr
-Yu
+dr
+dr
 dr
 dr
 dr
@@ -1113,18 +1122,15 @@ dr
 dr
 bq
 bq
-mE
-mE
-dr
-dr
-Qk
-dr
-dr
-dr
-dr
-dr
 dr
 mE
+dr
+dr
+dr
+dr
+dr
+dr
+dr
 dr
 dr
 dr
@@ -1137,7 +1143,10 @@ dr
 dr
 dr
 dr
-Eh
+dr
+dr
+dr
+dr
 dr
 "}
 (8,1,1) = {"
@@ -1150,35 +1159,35 @@ dr
 dr
 dr
 dr
+mE
+dr
+dr
+dr
+mE
+dr
+dr
+dr
 dr
 dr
 dr
 dr
 dr
 mE
-Eh
-RN
-dr
-dr
-dr
-dr
-dr
-dr
 dr
 bq
 dr
-mE
-mE
+dr
+dr
 dr
 dr
 "}
 (9,1,1) = {"
-mE
+dr
 dr
 dr
 bq
 bq
-mE
+dr
 dr
 dr
 dr
@@ -1237,14 +1246,13 @@ dr
 dr
 "}
 (11,1,1) = {"
+Qk
 dr
 dr
-mE
 dr
 gG
 dr
 dr
-vj
 dr
 dr
 dr
@@ -1259,7 +1267,8 @@ dr
 dr
 dr
 dr
-Eh
+dr
+dr
 bq
 bq
 bq
@@ -1279,17 +1288,17 @@ dr
 dr
 dr
 dr
-dr
-OW
-dr
-dr
-Wx
+vj
+CT
+vj
+vj
+vj
 bx
-Wx
-Wx
-Wx
+Eh
+Eh
+Eh
 OW
-dr
+vj
 dr
 dr
 bq
@@ -1298,10 +1307,10 @@ bq
 bq
 dr
 dr
-mE
+dr
 "}
 (13,1,1) = {"
-Eh
+dr
 dr
 dr
 dr
@@ -1310,8 +1319,8 @@ dr
 Yu
 dr
 dr
-Wx
-dr
+Eh
+vj
 Rv
 Rv
 Rv
@@ -1321,8 +1330,8 @@ Rv
 Rv
 Rv
 Rv
-dr
-dr
+vj
+vj
 dr
 bq
 bq
@@ -1330,17 +1339,17 @@ bq
 bq
 dr
 dr
-mE
+dr
 "}
 (14,1,1) = {"
 dr
 dr
-dr
+mE
 dr
 qW
 dr
-dr
-dr
+vj
+vj
 CT
 Wx
 Rv
@@ -1362,16 +1371,16 @@ bq
 dr
 dr
 dr
-mE
+Qk
 "}
 (15,1,1) = {"
 dr
 dr
 dr
-WE
+dr
 qW
 dr
-dr
+vj
 Rv
 Rv
 Rv
@@ -1386,14 +1395,14 @@ hK
 Gp
 LG
 Rv
-Wx
+Eh
 dr
 qW
 dr
 dr
 dr
-mE
-mE
+dr
+dr
 dr
 "}
 (16,1,1) = {"
@@ -1403,7 +1412,7 @@ dr
 dr
 qW
 dr
-Eh
+vj
 Rv
 nD
 DM
@@ -1418,24 +1427,24 @@ zT
 fa
 Ih
 Rv
-dr
-Wx
+vj
+Eh
 gG
 dr
-dr
 mE
+dr
 dr
 dr
 dr
 "}
 (17,1,1) = {"
 dr
-RN
+dr
 dr
 dr
 qW
 dr
-dr
+vj
 Rv
 tl
 ru
@@ -1450,7 +1459,7 @@ Rv
 LV
 Rv
 Rv
-dr
+vj
 dr
 vj
 dr
@@ -1462,9 +1471,9 @@ dr
 "}
 (18,1,1) = {"
 dr
-mE
 dr
-Yu
+dr
+dr
 qW
 dr
 zt
@@ -1482,14 +1491,14 @@ yR
 hD
 SE
 Rv
-dr
-dr
+vj
 dr
 vj
 dr
 dr
-Eh
-Yu
+dr
+dr
+dr
 dr
 "}
 (19,1,1) = {"
@@ -1499,7 +1508,7 @@ dr
 dr
 qW
 dr
-Wx
+Eh
 Rv
 Om
 gb
@@ -1514,24 +1523,24 @@ Rv
 SR
 Rv
 Rv
-Eh
+vj
 dr
 gG
 dr
 dr
 dr
-Eh
+dr
 dr
 dr
 "}
 (20,1,1) = {"
-mE
-mE
+dr
+dr
 dr
 dr
 qW
 dr
-dr
+vj
 Rv
 if
 vR
@@ -1543,27 +1552,27 @@ Iu
 lG
 Rv
 Ju
-Wx
+Eh
 UW
-dr
-dr
+vj
+vj
 dr
 qW
-mE
 dr
 dr
 dr
 mE
+dr
 dr
 "}
 (21,1,1) = {"
 dr
 dr
 dr
-mE
+dr
 qW
 dr
-dr
+vj
 Rv
 lJ
 jF
@@ -1574,28 +1583,28 @@ Ml
 uL
 QO
 Rv
-Wx
-Wx
-Wx
-Wx
-dr
-qW
-qW
-mE
-dr
-dr
-dr
-dr
 Eh
+Eh
+Eh
+Eh
+dr
+qW
+qW
+dr
+dr
+dr
+dr
+dr
+dr
 "}
 (22,1,1) = {"
+Qk
 dr
 dr
 dr
-mE
 gG
 dr
-Wx
+Eh
 Rv
 Rv
 Rv
@@ -1606,31 +1615,31 @@ hK
 uL
 pM
 Rv
-Wx
-Wx
-Wx
-Wx
-Wx
-Wx
+Eh
+Eh
+Eh
+Eh
+Eh
+Eh
 KL
 dr
 dr
 dr
-WE
+dr
 dr
 dr
 "}
 (23,1,1) = {"
 dr
-Eh
+dr
 dr
 dr
 gG
 dr
-dr
-Wx
-Wx
-Wx
+vj
+Eh
+Eh
+Eh
 Rv
 OS
 Bm
@@ -1639,11 +1648,11 @@ uk
 QH
 Rv
 bn
-Wx
-Wx
-Wx
-Wx
-Wx
+Eh
+Eh
+Eh
+Eh
+Eh
 KL
 dr
 dr
@@ -1655,14 +1664,14 @@ dr
 (24,1,1) = {"
 dr
 dr
-RN
+dr
 dr
 qW
 dr
 dr
 dr
-Wx
-Wx
+Eh
+Eh
 Rv
 dR
 qh
@@ -1670,42 +1679,23 @@ mo
 Gx
 uR
 Rv
-Wx
-Wx
-Wx
-Wx
+Eh
+Eh
+Eh
+Eh
 dr
 qW
 qW
 dr
 dr
 dr
-Yu
 dr
 dr
+Qk
 "}
 (25,1,1) = {"
 dr
 dr
-Gw
-dr
-qW
-dr
-dr
-dr
-dr
-Wx
-Rv
-Rv
-Rv
-Rv
-Rv
-Rv
-Rv
-Wx
-Wx
-Wx
-dr
 dr
 dr
 qW
@@ -1713,8 +1703,27 @@ dr
 dr
 dr
 dr
+Eh
+Rv
+Rv
+Rv
+Rv
+Rv
+Rv
+Rv
+Eh
+Eh
+Eh
 dr
-mE
+dr
+dr
+qW
+dr
+dr
+dr
+dr
+dr
+dr
 "}
 (26,1,1) = {"
 dr
@@ -1723,21 +1732,21 @@ dr
 dr
 qW
 dr
-mE
 dr
 dr
 dr
+vj
 gA
-Wx
+Eh
+vj
+vj
+Eh
+Eh
+Eh
+Eh
 Eh
 dr
-Wx
-Wx
-Wx
-Wx
-Wx
-dr
-Wx
+Eh
 dr
 dr
 qW
@@ -1756,68 +1765,40 @@ dr
 qW
 dr
 dr
-mE
-mE
-dr
-dr
-Wx
 dr
 dr
 dr
-Wx
-Wx
-Wx
+dr
+Eh
+dr
+dr
+dr
+Eh
+Eh
+Eh
 ls
-Wx
+Eh
 dr
 dr
 bq
 bq
 dr
-RN
 dr
 dr
 dr
-mE
+dr
+dr
 "}
 (28,1,1) = {"
 dr
 dr
-dr
+mE
 dr
 gG
 dr
 dr
 dr
 dr
-Wx
-dr
-dr
-dr
-dr
-dr
-dr
-Yu
-dr
-dr
-dr
-bq
-bq
-bq
-dr
-dr
-dr
-mE
-dr
-dr
-mE
-"}
-(29,1,1) = {"
-dr
-dr
-mE
-dr
-qW
 Eh
 dr
 dr
@@ -1825,12 +1806,40 @@ dr
 dr
 dr
 dr
-mE
+dr
+dr
+dr
+dr
+bq
+bq
+bq
 dr
 dr
 dr
 dr
 dr
+dr
+dr
+"}
+(29,1,1) = {"
+dr
+dr
+dr
+dr
+qW
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+RN
 dr
 bq
 bq
@@ -1840,7 +1849,7 @@ dr
 dr
 dr
 dr
-mE
+dr
 dr
 dr
 "}
@@ -1852,15 +1861,15 @@ dr
 qW
 bq
 bq
-dr
+vj
 sX
-Wx
+Eh
+vj
+vj
+vj
+vj
+vj
 dr
-mE
-dr
-dr
-dr
-mE
 dr
 dr
 dr
@@ -1879,7 +1888,7 @@ dr
 (31,1,1) = {"
 dr
 dr
-WE
+dr
 dr
 bq
 bq
@@ -1892,7 +1901,7 @@ Rv
 Rv
 Rv
 vj
-dr
+WE
 dr
 dr
 dr
@@ -1900,7 +1909,7 @@ bq
 bq
 bq
 dr
-mE
+dr
 dr
 dr
 dr
@@ -1909,7 +1918,7 @@ dr
 dr
 "}
 (32,1,1) = {"
-dr
+Qk
 dr
 dr
 dr
@@ -1924,20 +1933,20 @@ Mk
 Mk
 Rv
 JO
-dr
-dr
-Wx
+vj
+vj
+Eh
 da
 bq
 dr
 dr
 dr
 dr
-dr
-dr
-dr
-dr
 mE
+dr
+dr
+dr
+dr
 dr
 "}
 (33,1,1) = {"
@@ -1945,7 +1954,7 @@ dr
 dr
 dr
 dr
-Eh
+dr
 bq
 bq
 bq
@@ -1955,9 +1964,6 @@ hc
 hc
 nL
 Rv
-dr
-vj
-dr
 vj
 dr
 dr
@@ -1967,7 +1973,10 @@ dr
 dr
 dr
 dr
-Gw
+dr
+dr
+dr
+dr
 dr
 dr
 dr
@@ -1975,8 +1984,8 @@ dr
 (34,1,1) = {"
 dr
 dr
-Yu
-mE
+dr
+dr
 dr
 bq
 bq
@@ -1999,34 +2008,34 @@ dr
 dr
 dr
 dr
+Qk
 dr
 dr
-Yu
 dr
 "}
 (35,1,1) = {"
 dr
 dr
 dr
+dr
+dr
+dr
+bq
+bq
+Rv
+Rv
+Rv
+Rv
+Rv
+Rv
+bq
+dr
 mE
 dr
-Eh
-bq
-bq
-Rv
-Rv
-Rv
-Rv
-Rv
-Rv
-bq
-RN
 dr
 dr
 dr
 dr
-dr
-mE
 dr
 dr
 dr
@@ -2039,25 +2048,25 @@ dr
 (36,1,1) = {"
 dr
 dr
+dr
+dr
+dr
+dr
+dr
+bq
+bq
+bq
+bq
+vj
+bq
+bq
+dr
+dr
+dr
+dr
+dr
 mE
-mE
 dr
-dr
-Yu
-bq
-bq
-bq
-bq
-dr
-bq
-bq
-dr
-dr
-dr
-dr
-dr
-mE
-mE
 dr
 dr
 dr
@@ -2070,19 +2079,6 @@ dr
 "}
 (37,1,1) = {"
 dr
-vO
-dr
-dr
-dr
-mE
-dr
-dr
-dr
-dr
-dr
-dr
-dr
-mE
 dr
 dr
 dr
@@ -2091,12 +2087,25 @@ dr
 dr
 dr
 dr
-Yu
 dr
 dr
 dr
 dr
-vO
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
 dr
 dr
 "}
@@ -2104,44 +2113,37 @@ dr
 dr
 dr
 dr
-mE
-dr
-dr
-mE
-dr
-mE
 dr
 dr
 dr
 dr
 dr
 dr
-Eh
-dr
-dr
-dr
-Gw
 dr
 dr
 dr
 dr
-Eh
 dr
 dr
 dr
-WE
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
+dr
 dr
 "}
 (39,1,1) = {"
 dr
 dr
-Gw
-dr
-dr
-dr
-mE
-dr
-WE
 dr
 dr
 dr
@@ -2152,8 +2154,15 @@ dr
 dr
 dr
 dr
+Qk
 dr
 dr
+dr
+dr
+dr
+dr
+dr
+Qk
 dr
 dr
 dr
