@@ -26,7 +26,7 @@
 		to_chat(src, "Only administrators may use this command.")
 		return
 
-	var/msg = sanitize(input("Message:", "Subtle PM to [M.key]"))
+	var/msg = tgui_input_text(usr, "Enter your subtle message.", "Subtle PM to [M.key]", encode = FALSE)
 
 	if (!msg)
 		return
@@ -36,7 +36,7 @@
 				to_chat(M, "<b>You hear a voice in your head... <i>[msg]</i></b>")
 
 	log_admin("SubtlePM: [key_name(usr)] -> [key_name(M)] : [msg]")
-	message_admins(SPAN_NOTICE("<b>SubtleMessage: [key_name_admin(usr)] -> [key_name_admin(M)] : [msg]</b>"), 1)
+	message_admins(SPAN_NOTICE("<b>SubtleMessage: [key_name_admin(usr)] -> [key_name_admin(M)] : [sanitize_tg(msg)]</b>"), 1)
 	feedback_add_details("admin_verb","SMS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_mentor_check_new_players()	//Allows mentors / admins to determine who the newer players are.
@@ -83,12 +83,12 @@
 		to_chat(src, "Only administrators may use this command.")
 		return
 
-	var/msg = html_decode(sanitize(input("Message:", "Enter the text you wish to appear to everyone:")))
+	var/msg = tgui_input_text(usr, "Enter the text you wish to appear to everyone.", "Global Narrate", encode = FALSE)
 
 	if (!msg)
 		return
 	to_world("[msg]")
-	log_admin("GlobalNarrate: [key_name(usr)] : [msg]")
+	log_admin("GlobalNarrate: [key_name(usr)] : [sanitize_tg(msg)]")
 	message_admins(SPAN_NOTICE("\bold GlobalNarrate: [key_name_admin(usr)] : [msg]<BR>"), 1)
 	feedback_add_details("admin_verb","GLN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -110,13 +110,13 @@
 	else
 		return
 
-	var/msg = html_decode(sanitize(input("Message:", "Enter the text you wish to appear to everyone within seven tiles of you:")))
+	var/msg = tgui_input_text(usr, "Enter the text you wish to appear to everyone within seven tiles of you.", "Local Narrate", encode = FALSE)
 	if(!msg)
 		return
 	for(var/M in message_mobs)
 		to_chat(M, msg)
 	log_admin("LocalNarrate: [key_name(usr)] : [msg]")
-	message_admins(SPAN_NOTICE("\bold LocalNarrate: [key_name_admin(usr)] : [msg]<BR>"), 1)
+	message_admins(SPAN_NOTICE("\bold LocalNarrate: [key_name_admin(usr)] : [sanitize_tg(msg)]<BR>"), 1)
 	feedback_add_details("admin_verb", "LCLN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -192,14 +192,14 @@
 	if(!M)
 		return
 
-	var/msg = html_decode(sanitize(input("Message:", "Enter the text you wish to appear to your target:")))
+	var/msg = tgui_input_text(usr, "Enter the text you wish to appear to your target.", "Direct Narrate", encode = FALSE)
 
 	if( !msg )
 		return
 
 	to_chat(M, msg)
 	log_admin("DirectNarrate: [key_name(usr)] to ([M.name]/[M.key]): [msg]")
-	message_admins(SPAN_NOTICE("\bold DirectNarrate: [key_name(usr)] to ([M.name]/[M.key]): [msg]<BR>"), 1)
+	message_admins(SPAN_NOTICE("\bold DirectNarrate: [key_name(usr)] to ([M.name]/[M.key]): [sanitize_tg(msg)]<BR>"), 1)
 	feedback_add_details("admin_verb","DIRN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_godmode(mob/M as mob in GLOB.mob_list)
@@ -1126,3 +1126,18 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	message_admins("[key_name_admin(usr)] sent a pregenerated tip of the round.")
 	log_admin("[key_name(usr)] sent a pregenerated Tip of the Round.")
 	feedback_add_details("admin_verb","FAP")
+
+// Variant of the narrate panel that is for admins. This is logged to check if people are abusing it.
+/client/proc/cmd_admin_open_narrate_panel()
+	set category = "Special Verbs"
+	set name = "Narration Panel"
+
+	if (!check_rights(R_ADMIN, TRUE))
+		return
+
+	var/datum/tgui_module/narrate_panel/NP = new /datum/tgui_module/narrate_panel(usr)
+	NP.ui_interact(usr)
+
+	message_admins("[key_name_admin(usr)] used the Narration Panel")
+	log_admin("[key_name(usr)] used the Narration Panel")
+	feedback_add_details("admin_verb", "AONP")

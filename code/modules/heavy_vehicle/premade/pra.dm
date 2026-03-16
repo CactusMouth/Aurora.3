@@ -28,6 +28,7 @@
 	desc = "Strong legs adapted for the Adhomian rought terrain."
 	icon_state = "egg_legs"
 	move_delay = 3
+	damaged_delay = 3
 	turn_delay = 3
 	max_damage = 100
 	power_use = 2500
@@ -42,7 +43,7 @@
 	max_damage = 50
 	power_use = 50000
 	vision_flags = SEE_MOBS
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
+	lighting_alpha = LIGHTING_PLANE_ALPHA_SOMEWHAT_INVISIBLE
 
 /obj/item/mech_component/sensors/pra_egg/prebuild()
 	..()
