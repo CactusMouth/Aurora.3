@@ -11,7 +11,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	name = "Safety Shutters";
-	id = "sol_interceptor_lockdown"
+	id = "sol_downed_interceptor_lockdown"
 	},
 /turf/simulated/floor/plating,
 /area/template_noop)
@@ -75,7 +75,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 8;
 	name = "Safety Shutters";
-	id = "sol_interceptor_lockdown"
+	id = "sol_downed_interceptor_lockdown"
 	},
 /turf/simulated/floor/plating,
 /area/template_noop)
@@ -90,7 +90,7 @@
 	dir = 4;
 	pixel_y = 4;
 	pixel_x = 18;
-	id = "sol_interceptor_lockdown";
+	id = "sol_downed_interceptor_lockdown";
 	name = "Windshield Blast Doors"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
